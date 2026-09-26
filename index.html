@@ -376,6 +376,39 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
       <article class="proj">
         <div>
           <div class="proj-head">
+            <h3>Reliable but Invalid<span class="cn">评分表的幻觉</span></h3>
+            <span class="pill">Open source</span>
+          </div>
+          <p class="role"><span class="en">Evaluation design · corpus engineering · statistical analysis — 2026</span><span class="zh">评估设计 · 语料工程 · 统计分析 — 2026</span></p>
+          <p>
+            <span class="en">A self-improvement loop had a model write novel openings, score them against a genre rubric, and rewrite its own instructions from the low-scoring dimensions. The scores plateaued. This project is the work of finding out why — and the answer turned out to be about the measuring instrument, not the writer.</span>
+            <span class="zh">一个自我改进循环：模型写小说开头、用评分表给自己打分、再据低分项改写写作指令。分数卡住不动。这个项目就是追查原因的过程——而答案不在写手身上，在那把尺子上。</span>
+          </p>
+          <ul class="did">
+            <li><span class="en">Built an 840-item benchmark across 37 genre × channel cells from a 1,110-novel corpus, with contamination exclusions computed per cell from what the pipeline actually read — an audit of which surfaced a leak the hard-coded rule had missed.</span><span class="zh">用 1,110 部小说的语料建成 840 项基准，覆盖 37 个品类×频道格子；污染排除按各格管线实际读过的内容逐格计算——自查这个接触面时发现了硬编码规则漏掉的一处泄漏。</span></li>
+            <li><span class="en">Showed a human-vetted rubric explained under 2% of reader-behaviour variance despite high test–retest reliability (ICC = .87). Reliability and inter-judge agreement — the two standard warrants for LLM-as-judge evaluation — cannot detect this failure.</span><span class="zh">证明经人工审核的评分表只能解释读者行为方差的不到 2%，而其重测信度高达 ICC = .87。信度与评审间一致性——业界给 LLM 评审背书的两个标准手段——都查不出这种失效。</span></li>
+            <li><span class="en">Found that judge choice reverses the conclusion: four models across three vendors disagreed by 3.6 points on identical texts, including two capability tiers from a single vendor. Sampling across vendors does not mitigate it.</span><span class="zh">发现结论取决于谁来评：四个模型、三家厂商，对同一批文本的判断跨度 3.6 分，其中两个还是同一厂商的不同档位。多找几家厂商投票并不能缓解。</span></li>
+            <li><span class="en">Engineered the metadata harvest to 96.6% success across 838 API calls — global throttle, circuit breaker, checkpointed resume — after diagnosing that an earlier version had reported 648 service outages as missing data.</span><span class="zh">把元数据抓取做到 838 次调用 96.6% 成功（全局节流、熔断、断点续跑）——此前一版曾把 648 次服务故障误报成数据缺失。</span></li>
+            <li><span class="en">Shipped a publication sanitizer whose content-layer gate blocked 822 sites of copyrighted text from release, plus an errata documenting six analysis defects and four retracted conclusions.</span><span class="zh">交付了发布前净化工具，其内容层闸门拦下 822 处受版权保护的原文；另附勘误记录，列明六类分析缺陷与四条被撤回的结论。</span></li>
+          </ul>
+        </div>
+        <div class="aside">
+          <dl>
+            <dt><span class="en">Repository</span><span class="zh">代码仓库</span></dt>
+            <dd><a class="visit" href="https://github.com/XZ-LI/llm-rubric-validity" target="_blank" rel="noopener">llm-rubric-validity</a></dd>
+            <dt><span class="en">Judges evaluated</span><span class="zh">参评模型</span></dt>
+            <dd class="stack"><span>qwen3-max</span><span>o3</span><span>deepseek-v4-pro</span><span>qwen-turbo</span></dd>
+            <dt><span class="en">Scale</span><span class="zh">规模</span></dt>
+            <dd><span class="en">840 held-out novels · 37 cells · 1,210 scoring calls · six reader-response criteria</span><span class="zh">840 部留出小说 · 37 个格子 · 1,210 次评分调用 · 六个读者反应效标</span></dd>
+            <dt><span class="en">Built with</span><span class="zh">技术栈</span></dt>
+            <dd class="stack"><span>Python</span><span>NumPy</span><span>jieba</span><span>OpenAI-compatible APIs</span></dd>
+          </dl>
+        </div>
+      </article>
+
+<article class="proj">
+        <div>
+          <div class="proj-head">
             <h3>Doll Voice<span class="cn">玩偶星球</span></h3>
             <span class="pill">Live</span>
           </div>
@@ -406,37 +439,6 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
       </article>
 
             <article class="proj">
-        <div>
-          <div class="proj-head">
-            <h3>Reliable but Invalid<span class="cn">评分表的幻觉</span></h3>
-            <span class="pill">Open source</span>
-          </div>
-          <p class="role"><span class="en">Evaluation design · corpus engineering · statistical analysis — 2026</span><span class="zh">评估设计 · 语料工程 · 统计分析 — 2026</span></p>
-          <p>
-            <span class="en">A self-improvement loop had a model write novel openings, score them against a genre rubric, and rewrite its own instructions from the low-scoring dimensions. The scores plateaued. This project is the work of finding out why — and the answer turned out to be about the measuring instrument, not the writer.</span>
-            <span class="zh">一个自我改进循环：模型写小说开头、用评分表给自己打分、再据低分项改写写作指令。分数卡住不动。这个项目就是追查原因的过程——而答案不在写手身上，在那把尺子上。</span>
-          </p>
-          <ul class="did">
-            <li><span class="en">Built an 840-item benchmark across 37 genre × channel cells from a 1,110-novel corpus, with contamination exclusions computed per cell from what the pipeline actually read — an audit of which surfaced a leak the hard-coded rule had missed.</span><span class="zh">用 1,110 部小说的语料建成 840 项基准，覆盖 37 个品类×频道格子；污染排除按各格管线实际读过的内容逐格计算——自查这个接触面时发现了硬编码规则漏掉的一处泄漏。</span></li>
-            <li><span class="en">Showed a human-vetted rubric explained under 2% of reader-behaviour variance despite high test–retest reliability (ICC = .87). Reliability and inter-judge agreement — the two standard warrants for LLM-as-judge evaluation — cannot detect this failure.</span><span class="zh">证明经人工审核的评分表只能解释读者行为方差的不到 2%，而其重测信度高达 ICC = .87。信度与评审间一致性——业界给 LLM 评审背书的两个标准手段——都查不出这种失效。</span></li>
-            <li><span class="en">Found that judge choice reverses the conclusion: four models across three vendors disagreed by 3.6 points on identical texts, including two capability tiers from a single vendor. Sampling across vendors does not mitigate it.</span><span class="zh">发现结论取决于谁来评：四个模型、三家厂商，对同一批文本的判断跨度 3.6 分，其中两个还是同一厂商的不同档位。多找几家厂商投票并不能缓解。</span></li>
-          </ul>
-        </div>
-        <div class="aside">
-          <dl>
-            <dt><span class="en">Repository</span><span class="zh">代码仓库</span></dt>
-            <dd><a class="visit" href="https://github.com/XZ-LI/llm-rubric-validity" target="_blank" rel="noopener">llm-rubric-validity</a></dd>
-            <dt><span class="en">Judges evaluated</span><span class="zh">参评模型</span></dt>
-            <dd class="stack"><span>qwen3-max</span><span>o3</span><span>deepseek-v4-pro</span><span>qwen-turbo</span></dd>
-            <dt><span class="en">Scale</span><span class="zh">规模</span></dt>
-            <dd><span class="en">840 held-out novels · 37 cells · 1,210 scoring calls · six reader-response criteria</span><span class="zh">840 部留出小说 · 37 个格子 · 1,210 次评分调用 · 六个读者反应效标</span></dd>
-            <dt><span class="en">Built with</span><span class="zh">技术栈</span></dt>
-            <dd class="stack"><span>Python</span><span>NumPy</span><span>jieba</span><span>OpenAI-compatible APIs</span></dd>
-          </dl>
-        </div>
-      </article>
-
-<article class="proj">
         <div>
           <div class="proj-head">
             <h3>Starfight<span class="cn">星战</span></h3>
