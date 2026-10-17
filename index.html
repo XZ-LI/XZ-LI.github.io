@@ -175,19 +175,31 @@ section{padding:clamp(3rem,7vw,5rem) 0;border-top:1px solid var(--rule)}
   background:var(--surface);border:1px solid var(--rule);border-radius:4px;
   padding:clamp(1.4rem,3vw,2.1rem);box-shadow:var(--shadow);
 }
-.proj > details > summary{
+details > summary{
   list-style:none;cursor:pointer;display:block;position:relative;padding-right:2.2rem;
 }
-.proj > details > summary::-webkit-details-marker{display:none}
-.proj > details > summary::after{
+details > summary::-webkit-details-marker{display:none}
+details > summary::after{
   content:"";position:absolute;right:.4rem;top:.5rem;width:.5rem;height:.5rem;
   border-right:1.5px solid var(--ink-3);border-bottom:1.5px solid var(--ink-3);
   transform:rotate(45deg);transition:transform .18s ease;
 }
-.proj > details[open] > summary::after{transform:rotate(-135deg);top:.75rem}
-.proj > details > summary:hover::after{border-color:var(--accent)}
-.proj > details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:5px;border-radius:3px}
+details[open] > summary::after{transform:rotate(-135deg);top:.75rem}
+details > summary:hover::after{border-color:var(--accent)}
+details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:5px;border-radius:3px}
 .proj > details > summary .role{margin-bottom:0}
+.cv-group > details > summary{padding-right:1.8rem}
+.cv-group > details > summary::after{top:.35rem}
+.cv-group > details[open] > summary::after{top:.2rem}
+.cv-group > details > summary h3.cv-h{margin-bottom:0}
+.cv-body{margin-top:1rem}
+.runs details > summary{padding-right:1.6rem}
+.runs details > summary::after{top:.42rem;width:.42rem;height:.42rem}
+.runs details[open] > summary::after{top:.6rem}
+.run-body{margin-top:.45rem}
+.runs.nested{margin-top:.55rem;padding-left:.2rem}
+.runs.nested > li{padding:.5rem 0}
+.runs.nested > li:first-child{padding-top:0}
 .proj-body{
   display:grid;grid-template-columns:minmax(0,1fr) minmax(0,17rem);gap:clamp(1.4rem,4vw,3rem);
   margin-top:1.2rem;
@@ -703,12 +715,14 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
   <div class="wrap">
     <div class="sec-head">
       <h2><span class="en">Content Design</span><span class="zh">内容设计</span></h2>
+    
+      <button class="tog expand-all" type="button" aria-expanded="false"><span class="lbl-more"><span class="en">Expand all</span><span class="zh">全部展开</span></span><span class="lbl-less"><span class="en">Collapse all</span><span class="zh">全部收起</span></span></button>
     </div>
     <ul class="runs">
-      <li><span class="yr">2026</span><span><b>Contributor tutorials, Chinese Theater Collaborative.</b> <span class="en">Eight step-by-step guides written for contributors with little or no technical experience — adding a video clip, placing and sizing figures, writing alt text, building subtitles and audio description, upscaling footage, and the multimodal AI and prompting each of those steps relies on. Every workflow tested firsthand, then rewritten wherever a step proved error-prone. Accompanied by a review of each tool the project uses against university policy, with alternatives and a migration plan.</span><span class="zh">为几乎没有技术背景的协作者写的八份分步指南——添加视频片段、放置与缩放插图、撰写替代文本、制作字幕与口述影像、提升画质，以及每一步所依赖的多模态 AI 与提示词写法。每条流程都亲自跑过一遍，哪一步容易出错就改写哪一步。另附一份工具合规审查，逐项对照校方政策，并给出替代方案与迁移计划。</span><span class="eg"><span class="en"><b>Example</b> — the captioning standard those guides encode: Chinese and English tracks kept paired rather than merged, sound labels carrying the non-speech audio a deaf viewer would otherwise lose, audio description confined to the silences between sung lines so it never speaks over the performance. Written to hold for material I will never see, and proven on a 1964 opera film before anyone was asked to follow it. <a href="https://github.com/CTC2026/ctc-jekyll/blob/main/docs/HOW_TO_subtitles_and_audio.md" target="_blank" rel="noopener">HOW_TO_subtitles_and_audio.md</a></span><span class="zh"><b>例</b>——这些指南所固化的一条规范：中英字幕轨成对保留而不合并；声音标注承载听障观众否则会错过的非语音信息；口述影像只进唱句之间的静默处，绝不压过表演。规则写成可套用于我永远不会看到的素材，并先在一部 1964 年戏曲电影上验证，才要求他人遵循。<a href="https://github.com/CTC2026/ctc-jekyll/blob/main/docs/HOW_TO_subtitles_and_audio.md" target="_blank" rel="noopener">HOW_TO_subtitles_and_audio.md</a></span></span><span class="venue"><a href="https://github.com/CTC2026/ctc-jekyll/tree/main/docs" target="_blank" rel="noopener">github.com/CTC2026/ctc-jekyll · docs</a></span></span></li>
-      <li><span class="yr">2021–</span><span><b>Instructional materials, Chinese language program, The Ohio State University.</b> <span class="en">Explanations, materials and guidance built for learners with very different amounts of prior knowledge, turning linguistic and cultural concepts into steps a student can actually follow. Coordinated instructors and students to keep program guidance clear and consistent; coordinator appointments 2023–24 and 2025–present.</span><span class="zh">为先备知识差异极大的学习者编写讲解、教材与指引，把语言与文化概念拆成学生真的跟得上的步骤。协调教师与学生，保持课程指引清楚一致；协调人任期为 2023–24 与 2025 年至今。</span></span></li>
-      <li><span class="yr">2026</span><span><b>Course design — two syllabi, designed and not yet taught.</b> <span class="en"><em>Digital Humanities and Chinese Studies</em>: a lab-style methods course that runs the same four beats — concept, application in Chinese Studies, practicum, showcase — across social network analysis, GIS, text analysis, topic modelling and stylometry, so a student practises one workflow five times. <em>Adventure in Chinese Fiction, Film, and Video Games</em>: one genre tracked from the sixteenth century to <em>Black Myth: Wukong</em>, across fiction, film and games. Both carry observable objectives with assessment weighted against them; the DH course adds a five-dimension rubric whose pass condition is reproducible data and stated limitations.</span><span class="zh"><em>数字人文与中国研究</em>：实验课形式，社会网络分析、GIS、文本分析、主题模型、文体计量五种方法各走一遍「概念—在中国研究中的应用—实操—展示」，让学生把同一套工作流练五次。<em>中国小说、电影与电子游戏中的冒险</em>：一个类型，从 16 世纪追到《黑神话：悟空》，横跨小说、影视与游戏。两份都写明可观察的学习目标，评分权重与目标逐条对应；数字人文那门另附五维度评分表，及格条件是数据可复现、并说明方法的盲区。</span><span class="venue"><a href="files/Xuezhao-Li-syllabus-DH-and-Chinese-Studies.pdf" target="_blank" rel="noopener">DH &amp; Chinese Studies (PDF)</a> · <a href="files/Xuezhao-Li-syllabus-Adventure-Fiction-Film-Games.pdf" target="_blank" rel="noopener">Adventure in Fiction, Film &amp; Games (PDF)</a></span></span></li>
-      <li><span class="yr">2022–2024</span><span><b>Editorial Associate, <cite>WordWise</cite>.</b> <span class="en">Edited public-facing writing for clarity, terminology and consistency, working with contributors to make specialized translation topics readable by people outside the field.</span><span class="zh">编辑面向公众的稿件，把关清晰度、术语与一致性，与作者合作，让专业的翻译话题对圈外读者也读得懂。</span><span class="venue">OSU Translation &amp; Interpreting Program Newsletter · <a href="https://us9.campaign-archive.com/home/?u=a9fc3cbad2b78a658d10372b8&amp;id=59510398f4" target="_blank" rel="noopener"><span class="en">issue archive</span><span class="zh">往期归档</span></a></span></span></li>
+      <li><span class="yr">2026</span><details open><summary><b>Contributor tutorials, Chinese Theater Collaborative.</b></summary><div class="run-body"><span class="en">Eight step-by-step guides written for contributors with little or no technical experience — adding a video clip, placing and sizing figures, writing alt text, building subtitles and audio description, upscaling footage, and the multimodal AI and prompting each of those steps relies on. Every workflow tested firsthand, then rewritten wherever a step proved error-prone. Accompanied by a review of each tool the project uses against university policy, with alternatives and a migration plan.</span><span class="zh">为几乎没有技术背景的协作者写的八份分步指南——添加视频片段、放置与缩放插图、撰写替代文本、制作字幕与口述影像、提升画质，以及每一步所依赖的多模态 AI 与提示词写法。每条流程都亲自跑过一遍，哪一步容易出错就改写哪一步。另附一份工具合规审查，逐项对照校方政策，并给出替代方案与迁移计划。</span><span class="eg"><span class="en"><b>Example</b> — the captioning standard those guides encode: Chinese and English tracks kept paired rather than merged, sound labels carrying the non-speech audio a deaf viewer would otherwise lose, audio description confined to the silences between sung lines so it never speaks over the performance. Written to hold for material I will never see, and proven on a 1964 opera film before anyone was asked to follow it. <a href="https://github.com/CTC2026/ctc-jekyll/blob/main/docs/HOW_TO_subtitles_and_audio.md" target="_blank" rel="noopener">HOW_TO_subtitles_and_audio.md</a></span><span class="zh"><b>例</b>——这些指南所固化的一条规范：中英字幕轨成对保留而不合并；声音标注承载听障观众否则会错过的非语音信息；口述影像只进唱句之间的静默处，绝不压过表演。规则写成可套用于我永远不会看到的素材，并先在一部 1964 年戏曲电影上验证，才要求他人遵循。<a href="https://github.com/CTC2026/ctc-jekyll/blob/main/docs/HOW_TO_subtitles_and_audio.md" target="_blank" rel="noopener">HOW_TO_subtitles_and_audio.md</a></span></span><span class="venue"><a href="https://github.com/CTC2026/ctc-jekyll/tree/main/docs" target="_blank" rel="noopener">github.com/CTC2026/ctc-jekyll · docs</a></span></div></details></li>
+      <li><span class="yr">2021–</span><details><summary><b>Instructional materials, Chinese language program, The Ohio State University.</b></summary><div class="run-body"><span class="en">Explanations, materials and guidance built for learners with very different amounts of prior knowledge, turning linguistic and cultural concepts into steps a student can actually follow. Coordinated instructors and students to keep program guidance clear and consistent; coordinator appointments 2023–24 and 2025–present.</span><span class="zh">为先备知识差异极大的学习者编写讲解、教材与指引，把语言与文化概念拆成学生真的跟得上的步骤。协调教师与学生，保持课程指引清楚一致；协调人任期为 2023–24 与 2025 年至今。</span></div></details></li>
+      <li><span class="yr">2026</span><details><summary><b>Course design — two syllabi, designed and not yet taught.</b></summary><div class="run-body"><span class="en"><em>Digital Humanities and Chinese Studies</em>: a lab-style methods course that runs the same four beats — concept, application in Chinese Studies, practicum, showcase — across social network analysis, GIS, text analysis, topic modelling and stylometry, so a student practises one workflow five times. <em>Adventure in Chinese Fiction, Film, and Video Games</em>: one genre tracked from the sixteenth century to <em>Black Myth: Wukong</em>, across fiction, film and games. Both carry observable objectives with assessment weighted against them; the DH course adds a five-dimension rubric whose pass condition is reproducible data and stated limitations.</span><span class="zh"><em>数字人文与中国研究</em>：实验课形式，社会网络分析、GIS、文本分析、主题模型、文体计量五种方法各走一遍「概念—在中国研究中的应用—实操—展示」，让学生把同一套工作流练五次。<em>中国小说、电影与电子游戏中的冒险</em>：一个类型，从 16 世纪追到《黑神话：悟空》，横跨小说、影视与游戏。两份都写明可观察的学习目标，评分权重与目标逐条对应；数字人文那门另附五维度评分表，及格条件是数据可复现、并说明方法的盲区。</span><span class="venue"><a href="files/Xuezhao-Li-syllabus-DH-and-Chinese-Studies.pdf" target="_blank" rel="noopener">DH &amp; Chinese Studies (PDF)</a> · <a href="files/Xuezhao-Li-syllabus-Adventure-Fiction-Film-Games.pdf" target="_blank" rel="noopener">Adventure in Fiction, Film &amp; Games (PDF)</a></span></div></details></li>
+      <li><span class="yr">2022–2024</span><details><summary><b>Editorial Associate, <cite>WordWise</cite>.</b></summary><div class="run-body"><span class="en">Edited public-facing writing for clarity, terminology and consistency, working with contributors to make specialized translation topics readable by people outside the field.</span><span class="zh">编辑面向公众的稿件，把关清晰度、术语与一致性，与作者合作，让专业的翻译话题对圈外读者也读得懂。</span><span class="venue">OSU Translation &amp; Interpreting Program Newsletter · <a href="https://us9.campaign-archive.com/home/?u=a9fc3cbad2b78a658d10372b8&amp;id=59510398f4" target="_blank" rel="noopener"><span class="en">issue archive</span><span class="zh">往期归档</span></a></span></div></details></li>
     </ul>
   </div>
 </section>
@@ -717,12 +731,18 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
   <div class="wrap">
     <div class="sec-head">
       <h2><span class="en">Translation &amp; Localization</span><span class="zh">翻译与本地化</span></h2>
+    
+      <button class="tog expand-all" type="button" aria-expanded="false"><span class="lbl-more"><span class="en">Expand all</span><span class="zh">全部展开</span></span><span class="lbl-less"><span class="en">Collapse all</span><span class="zh">全部收起</span></span></button>
     </div>
     <ul class="runs">
-      <li><span class="yr">2026</span><span><b>Media localization, Chinese Theater Collaborative.</b> <span class="en">Bilingual subtitling of a 1964 opera film, with sound labels for non-speech audio and audio description written to fall in the silences between sung lines. Clips sourced, re-cut and restored before captioning. Built as the worked example the project’s other contributors caption against.</span><span class="zh">为一部 1964 年戏曲电影制作中英双语字幕，配非语音部分的声音标注，以及只落在唱句静默处的口述影像。片段在配字幕前由我找源、重剪与修复。这套成品是项目其他协作者对照施工的范例。</span><span class="venue"><a href="https://ctc2026.github.io/ctc-jekyll/" target="_blank" rel="noopener">ctc2026.github.io</a> · WebVTT, Arctime</span></span></li>
+      <li><span class="yr">2026</span><details open><summary><b>Media localization, Chinese Theater Collaborative.</b></summary><div class="run-body"><span class="en">Bilingual subtitling of a 1964 opera film, with sound labels for non-speech audio and audio description written to fall in the silences between sung lines. Clips sourced, re-cut and restored before captioning. Built as the worked example the project’s other contributors caption against.</span><span class="zh">为一部 1964 年戏曲电影制作中英双语字幕，配非语音部分的声音标注，以及只落在唱句静默处的口述影像。片段在配字幕前由我找源、重剪与修复。这套成品是项目其他协作者对照施工的范例。</span><span class="venue"><a href="https://ctc2026.github.io/ctc-jekyll/" target="_blank" rel="noopener">ctc2026.github.io</a> · WebVTT, Arctime</span></div></details></li>
+      <li><span class="yr">2021–2024</span><details><summary><b><span class="en">Published translations</span><span class="zh">出版译作</span></b></summary><div class="run-body">
+        <ul class="runs nested">
       <li><span class="yr">2024</span><span>Wang Tao, “A Brief Biography of Mary” 媚梨小傳, “A Great Overseas Adventure” 海外壯遊, and “A Wonderland under the Sea” 海底奇境.<span class="venue"><cite>Renditions</cite>, no. 100: 71–94. Chinese → English</span></span></li>
       <li><span class="yr">2023</span><span>Patricia Sieber,《自有風味：淺談散曲雅俗有致的本質》<span class="venue"><cite>Lingnan Journal of Chinese Studies</cite>, no. 18: 3–34. English → Chinese</span></span></li>
       <li><span class="yr">2021</span><span>Wang Zengqi, “Butter Pancakes” 黃油烙餅. <b>with Travis Telzrow</b><span class="venue"><a href="https://u.osu.edu/mclc/2021/06/03/butter-pancakes-by-wang-zengqi/" target="_blank" rel="noopener">MCLC Resource Center</a>. Chinese → English</span></span></li>
+        </ul>
+      </div></details></li>
     </ul>
   </div>
 </section>
@@ -732,11 +752,15 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
     <div class="sec-head">
       <h2><span class="en">Curriculum Vitae</span><span class="zh">履历</span></h2>
       <span class="sec-note"><span class="en">Ph.D. Candidate · Dept. of East Asian Languages &amp; Literatures, The Ohio State University</span><span class="zh">俄亥俄州立大学 东亚语言与文学系 博士候选人</span></span>
+    
+      <button class="tog expand-all" type="button" aria-expanded="false"><span class="lbl-more"><span class="en">Expand all</span><span class="zh">全部展开</span></span><span class="lbl-less"><span class="en">Collapse all</span><span class="zh">全部收起</span></span></button>
     </div>
 
     <div class="cv-group">
-      <h3 class="cv-h"><span class="en">Education</span><span class="zh">教育背景</span></h3>
-      <div class="entry">
+      <details open>
+        <summary><h3 class="cv-h"><span class="en">Education</span><span class="zh">教育背景</span></h3></summary>
+        <div class="cv-body">
+          <div class="entry">
         <div class="when">2020–2026</div>
         <div class="what">
           <h4>Ph.D., <span class="en">Chinese Literature, Performance &amp; Media Studies</span><span class="zh">中国文学、表演与媒体研究</span></h4>
@@ -760,17 +784,24 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
           <p class="where"><span class="en">Beijing Normal University</span><span class="zh">北京师范大学</span></p>
         </div>
       </div>
+        </div>
+      </details>
     </div>
 
     <div class="cv-group">
-      <h3 class="cv-h"><span class="en">Research Interests</span><span class="zh">研究方向</span></h3>
-      <p class="interests"><span class="en">Modern Chinese literature and culture · Digital humanities · Translation studies</span><span class="zh">中国现当代文学与文化 · 数字人文 · 翻译研究</span></p>
+      <details>
+        <summary><h3 class="cv-h"><span class="en">Research Interests</span><span class="zh">研究方向</span></h3></summary>
+        <div class="cv-body">
+          <p class="interests"><span class="en">Modern Chinese literature and culture · Digital humanities · Translation studies</span><span class="zh">中国现当代文学与文化 · 数字人文 · 翻译研究</span></p>
+        </div>
+      </details>
     </div>
 
     <div class="cv-group">
-      <h3 class="cv-h"><span class="en">Publications</span><span class="zh">论著</span></h3>
-
-      <p class="sub-h"><span class="en">Peer-reviewed articles &amp; interviews</span><span class="zh">同行评审论文与访谈</span></p>
+      <details>
+        <summary><h3 class="cv-h"><span class="en">Publications</span><span class="zh">论著</span></h3></summary>
+        <div class="cv-body">
+          <p class="sub-h"><span class="en">Peer-reviewed articles &amp; interviews</span><span class="zh">同行评审论文与访谈</span></p>
       <ul class="runs">
         <li><span class="yr">2026</span><span>“Social Network Analysis and Translation History: An Example of Translated Adventure Fiction in Modern China.”<span class="venue">In <cite>Relational Thinking in Translation: An Interdisciplinary Dialogue</cite>, ed. Reine Meylaerts &amp; Diana Roig-Sanz. London: Palgrave Macmillan. <span class="note">Forthcoming</span></span></span></li>
         <li><span class="yr">2026</span><span>“Teaching Chinese Literature with Digital Approaches: The Application of Social Network Analysis.”<span class="venue">In <cite>Teaching East Asian Literature and Media with AI: Explorations in Pedagogy, Technology, and Cultural Engagement</cite>, ed. Junjie Luo &amp; Rebecca Ehrenwirth. London: Palgrave Macmillan. <span class="note">Forthcoming</span></span></span></li>
@@ -792,12 +823,15 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
       <ul class="runs">
         <li><span class="yr">2026</span><span>“Colonialism and Feminism in Modern Chinese Adventure Fiction: A Topic Modeling Approach.”<span class="venue"><cite>Digital Scholarship in the Humanities</cite>. <span class="note">Second-round review</span></span></span></li>
       </ul>
-
+        </div>
+      </details>
     </div>
 
     <div class="cv-group">
-      <h3 class="cv-h"><span class="en">Conference Presentations &amp; Guest Lectures</span><span class="zh">会议报告与客座讲座</span></h3>
-      <ul class="runs">
+      <details>
+        <summary><h3 class="cv-h"><span class="en">Conference Presentations &amp; Guest Lectures</span><span class="zh">会议报告与客座讲座</span></h3></summary>
+        <div class="cv-body">
+          <ul class="runs">
         <li><span class="yr">Jan 2026</span><span>“Translators, Publishers, and Network Dynamics in Chinese Translations of Adventure Fiction (1898–1919): A Social Network Analysis”<span class="venue">Guest lecture, Department of Translation, The Chinese University of Hong Kong</span></span></li>
         <li><span class="yr">Jan 2026</span><span>“The Language Problem in Computational Textual Analysis: Reflections on a Case of Chinese-Language Translations”<span class="venue">MLA Convention, Toronto, Canada</span></span></li>
         <li><span class="yr">Oct 2025</span><span>“Modern Chinese Adventure Fiction: A Translational Genre of Colonial Modernity”<span class="venue">74th Midwest Conference on Asian Affairs, The Ohio State University</span></span></li>
@@ -817,12 +851,15 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
         <li><span class="yr">Jul 2019</span><span>“Translation and Style Reform: An Analysis of the Relay Translation of ‘The Californian’s Tale’”<span class="venue">22nd ICLA Congress, University of Macau</span></span></li>
         <li><span class="yr">Jul 2018</span><span>“On the Translation of <em>Hong Lou Meng</em> by Jorge Luis Borges”<span class="venue">8th Institute for World Literature (Harvard), University of Tokyo, Japan</span></span></li>
       </ul>
+        </div>
+      </details>
     </div>
 
     <div class="cv-group">
-      <h3 class="cv-h"><span class="en">Teaching &amp; Mentorship</span><span class="zh">教学与指导</span></h3>
-
-      <p class="sub-h"><span class="en">Graduate Teaching Associate, The Ohio State University</span><span class="zh">俄亥俄州立大学 研究生助教</span></p>
+      <details>
+        <summary><h3 class="cv-h"><span class="en">Teaching &amp; Mentorship</span><span class="zh">教学与指导</span></h3></summary>
+        <div class="cv-body">
+          <p class="sub-h"><span class="en">Graduate Teaching Associate, The Ohio State University</span><span class="zh">俄亥俄州立大学 研究生助教</span></p>
       <ul class="runs">
         <li><span class="yr">2025–2026</span><span><span class="en">Instructor, Chinese 1101.01 (classroom) &amp; Chinese Individual Instruction (online)</span><span class="zh">授课教师，Chinese 1101.01（课堂）与中文个别辅导（线上）</span></span></li>
         <li><span class="yr">2025</span><span><span class="en">Program Coordinator, Chinese Classroom Teaching — Chinese 1101.01</span><span class="zh">中文课堂教学项目协调员 — Chinese 1101.01</span></span></li>
@@ -838,11 +875,15 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
         <li><span class="yr">2024</span><span>CLLC 5103 · <span class="en">Translation and Interpreting Practicum</span><span class="zh">翻译与口译实践</span><span class="venue">“T&amp;I Dilemmas in the News Stories”</span></span></li>
         <li><span class="yr">2023</span><span>CLLC 5102 · <span class="en">Introduction to Literary Translation</span><span class="zh">文学翻译导论</span><span class="venue">“Drafting Your Translation Manifesto” · “Translation Dilemma: To Footnote or Not To Footnote”</span></span></li>
       </ul>
+        </div>
+      </details>
     </div>
 
     <div class="cv-group">
-      <h3 class="cv-h"><span class="en">Organizing, Editorial &amp; Service</span><span class="zh">组织、编辑与服务</span></h3>
-      <ul class="runs">
+      <details>
+        <summary><h3 class="cv-h"><span class="en">Organizing, Editorial &amp; Service</span><span class="zh">组织、编辑与服务</span></h3></summary>
+        <div class="cv-body">
+          <ul class="runs">
         <li><span class="yr">2026</span><span><b><span class="en">Roundtable organizer</span><span class="zh">圆桌组织者</span></b> — “Critical Digital Humanities in Practice: Reflections and Visions”<span class="venue">MLA Convention, Toronto, Canada</span></span></li>
         <li><span class="yr">2025</span><span><b><span class="en">Panel organizer</span><span class="zh">小组组织者</span></b> — “Creating Windows to the World: The Flow of Gender Norms, Lifestyles, and Knowledge to/within Modern East Asia”<span class="venue">AAS Annual Conference, Columbus</span></span></li>
         <li><span class="yr">2024</span><span><b><span class="en">Organizing Committee member</span><span class="zh">组织委员会成员</span></b> — 2024 CHINOPERL Conference<span class="venue">Chinese Oral and Performing Literature · The Ohio State University</span></span></li>
@@ -852,11 +893,15 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
         <li><span class="yr">2025–</span><span><b><span class="en">Member, Ad Hoc AI Task Force</span><span class="zh">AI 特别工作组成员</span></b><span class="venue">Dept. of East Asian Languages &amp; Literatures, The Ohio State University</span></span></li>
         <li><span class="yr">2022–2023</span><span><b><span class="en">Member, Teaching and Professional Development Committee</span><span class="zh">教学与职业发展委员会成员</span></b><span class="venue">Dept. of East Asian Languages &amp; Literatures, The Ohio State University</span></span></li>
       </ul>
+        </div>
+      </details>
     </div>
 
     <div class="cv-group">
-      <h3 class="cv-h"><span class="en">Scholarships &amp; Awards</span><span class="zh">奖学金与荣誉</span></h3>
-      <ul class="runs">
+      <details>
+        <summary><h3 class="cv-h"><span class="en">Scholarships &amp; Awards</span><span class="zh">奖学金与荣誉</span></h3></summary>
+        <div class="cv-body">
+          <ul class="runs">
         <li><span class="yr">2026</span><span>David Y. Chen Memorial Award<span class="venue">Dept. of East Asian Languages &amp; Literatures, The Ohio State University</span></span></li>
         <li><span class="yr">2025</span><span>Felice M. Grad Endowed Scholarship<span class="venue">Center for Languages, Literatures, and Cultures, The Ohio State University</span></span></li>
         <li><span class="yr">2024</span><span>Gordon P. K. Chu Memorial Scholarship<span class="venue">The Ohio State University</span></span></li>
@@ -864,11 +909,15 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
         <li><span class="yr">2022</span><span>Louise Zung-Nyi Loh Memorial Scholarship<span class="venue">East Asian Studies Center, The Ohio State University</span></span></li>
         <li><span class="yr">2022</span><span>Felice M. Grad Endowed Scholarship<span class="venue">Center for Languages, Literatures, and Cultures, The Ohio State University</span></span></li>
       </ul>
+        </div>
+      </details>
     </div>
 
     <div class="cv-group">
-      <h3 class="cv-h"><span class="en">Training: Seminars, Workshops &amp; Summer Schools</span><span class="zh">研修：研讨班、工作坊与暑期学校</span></h3>
-      <ul class="runs">
+      <details>
+        <summary><h3 class="cv-h"><span class="en">Training: Seminars, Workshops &amp; Summer Schools</span><span class="zh">研修：研讨班、工作坊与暑期学校</span></h3></summary>
+        <div class="cv-body">
+          <ul class="runs">
         <li><span class="yr">2025</span><span>Integrating Machine Translation Workshop<span class="venue">The Ohio State University</span></span></li>
         <li><span class="yr">2025</span><span>Ohio State–Indiana University Chinese Studies Graduate Student Workshop<span class="venue">The Ohio State University</span></span></li>
         <li><span class="yr">2024</span><span>Digital Humanities Pedagogy Workshop Series<span class="venue">The Ohio State University, February–April</span></span></li>
@@ -877,11 +926,15 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
         <li><span class="yr">2022</span><span>Bristol Translates Summer School<span class="venue">University of Bristol, UK (online)</span></span></li>
         <li><span class="yr">2022</span><span>11th Annual Summer Workshop on Asian Art, Religion, and History<span class="venue">Fudan University (online)</span></span></li>
       </ul>
+        </div>
+      </details>
     </div>
 
     <div class="cv-group">
-      <h3 class="cv-h"><span class="en">Capabilities, Languages &amp; Memberships</span><span class="zh">能力、语言与学会</span></h3>
-      <div class="grid2">
+      <details>
+        <summary><h3 class="cv-h"><span class="en">Capabilities, Languages &amp; Memberships</span><span class="zh">能力、语言与学会</span></h3></summary>
+        <div class="cv-body">
+          <div class="grid2">
         <dl class="card">
           <dt><span class="en">AI &amp; product</span><span class="zh">AI 与产品</span></dt>
           <dd><span class="en">Persona and system-prompt writing, LLM evaluation, content moderation policy, credit and pricing design, bilingual product flows. OpenAI · DeepSeek · Qwen · ElevenLabs · Volcano TTS.</span><span class="zh">人设与 system prompt 撰写、LLM 评测、内容审核策略、积分与定价设计、双语产品流程。OpenAI · DeepSeek · 通义 · ElevenLabs · 火山 TTS。</span></dd>
@@ -924,6 +977,8 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
           </dd>
         </dl>
       </div>
+        </div>
+      </details>
     </div>
   </div>
 </section>
@@ -973,7 +1028,7 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
 
   // 分区级「全部展开 / 全部收起」
   document.querySelectorAll('.expand-all').forEach(function(btn){
-    var cards = btn.closest('section').querySelectorAll('.proj > details');
+    var cards = btn.closest('section').querySelectorAll('.proj > details, .cv-group > details, .runs > li > details');
     if(!cards.length) return;
     function sync(){
       var allOpen = Array.prototype.every.call(cards, function(d){ return d.open; });
@@ -992,7 +1047,7 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
   var _reopen=[];
   window.addEventListener('beforeprint',function(){
     _reopen=[];
-    document.querySelectorAll('.proj > details:not([open])').forEach(function(d){_reopen.push(d);d.open=true;});
+    document.querySelectorAll('details:not([open])').forEach(function(d){_reopen.push(d);d.open=true;});
   });
   window.addEventListener('afterprint',function(){_reopen.forEach(function(d){d.open=false;});_reopen=[];});
   document.querySelectorAll('.topnav a, .mark').forEach(function(a){
