@@ -116,6 +116,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   padding:.3rem .55rem;border-radius:999px;cursor:pointer;line-height:1;
 }
 .tog:hover{border-color:var(--accent);color:var(--ink)}
+.expand-all{margin-left:auto;align-self:center;text-transform:uppercase}
+.expand-all .lbl-less{display:none}
+.expand-all[aria-expanded="true"] .lbl-more{display:none}
+.expand-all[aria-expanded="true"] .lbl-less{display:inline}
+.expand-all:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
 /* ---------- hero ---------- */
 .hero{padding:clamp(3.5rem,9vw,6.5rem) 0 clamp(2.5rem,6vw,4rem)}
@@ -389,12 +394,14 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
     <div class="sec-head">
       <h2><span class="en">AI Creations</span><span class="zh">AI 作品</span></h2>
       <span class="sec-note"><span class="en">Designed, written and shipped solo</span><span class="zh">独立设计 · 撰写 · 上线</span></span>
+    
+      <button class="tog expand-all" type="button" aria-expanded="false"><span class="lbl-more"><span class="en">Expand all</span><span class="zh">全部展开</span></span><span class="lbl-less"><span class="en">Collapse all</span><span class="zh">全部收起</span></span></button>
     </div>
 
     <div class="projects">
 
       <article class="proj">
-        <details>
+        <details open>
           <summary>
             <div class="proj-head">
             <h3>Reliable but Invalid<span class="cn">评分表的幻觉</span></h3>
@@ -574,10 +581,12 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
   <div class="wrap">
     <div class="sec-head">
       <h2><span class="en">Public Digital Humanities Projects</span><span class="zh">公共数字人文项目</span></h2>
+    
+      <button class="tog expand-all" type="button" aria-expanded="false"><span class="lbl-more"><span class="en">Expand all</span><span class="zh">全部展开</span></span><span class="lbl-less"><span class="en">Collapse all</span><span class="zh">全部收起</span></span></button>
     </div>
     <div class="projects">
       <article class="proj">
-        <details>
+        <details open>
           <summary>
             <div class="proj-head">
             <h3>Chinese Theater Collaborative</h3>
@@ -960,6 +969,23 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
     else { dark = window.matchMedia("(prefers-color-scheme: dark)").matches; }
     r.dataset.theme = dark ? "light" : "dark";
     try{localStorage.setItem("xl-theme",r.dataset.theme)}catch(e){}
+  });
+
+  // 分区级「全部展开 / 全部收起」
+  document.querySelectorAll('.expand-all').forEach(function(btn){
+    var cards = btn.closest('section').querySelectorAll('.proj > details');
+    if(!cards.length) return;
+    function sync(){
+      var allOpen = Array.prototype.every.call(cards, function(d){ return d.open; });
+      btn.setAttribute('aria-expanded', allOpen ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function(){
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      Array.prototype.forEach.call(cards, function(d){ d.open = open; });
+      sync();
+    });
+    Array.prototype.forEach.call(cards, function(d){ d.addEventListener('toggle', sync); });
+    sync();
   });
 
   // 打印/导出 PDF 时展开全部折叠项，打印后还原
