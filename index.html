@@ -252,9 +252,11 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:5
 .cv-group{margin-bottom:clamp(2.25rem,5vw,3.25rem)}
 .cv-group:last-child{margin-bottom:0}
 h3.cv-h{
-  font-family:var(--mono);font-size:.73rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ink-3);margin:0 0 1.25rem;padding-bottom:.6rem;border-bottom:1px solid var(--rule);
+  font-family:var(--mono);font-size:.92rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink);font-weight:500;
+  margin:0 0 1.25rem;padding-bottom:.6rem;border-bottom:1px solid var(--rule);
 }
+.cv-group > details > summary:hover h3.cv-h{color:var(--accent)}
 h3.cv-h .zh{font-family:var(--cn-body);letter-spacing:.14em}
 .entry{display:grid;grid-template-columns:8.5rem minmax(0,1fr);gap:clamp(1rem,3vw,2.25rem);padding:1.1rem 0}
 .entry + .entry{border-top:1px dotted var(--rule)}
@@ -789,7 +791,7 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
     </div>
 
     <div class="cv-group">
-      <details>
+      <details open>
         <summary><h3 class="cv-h"><span class="en">Research Interests</span><span class="zh">研究方向</span></h3></summary>
         <div class="cv-body">
           <p class="interests"><span class="en">Modern Chinese literature and culture · Digital humanities · Translation studies</span><span class="zh">中国现当代文学与文化 · 数字人文 · 翻译研究</span></p>
@@ -798,7 +800,7 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
     </div>
 
     <div class="cv-group">
-      <details>
+      <details open>
         <summary><h3 class="cv-h"><span class="en">Publications</span><span class="zh">论著</span></h3></summary>
         <div class="cv-body">
           <p class="sub-h"><span class="en">Peer-reviewed articles &amp; interviews</span><span class="zh">同行评审论文与访谈</span></p>
@@ -828,7 +830,7 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
     </div>
 
     <div class="cv-group">
-      <details>
+      <details open>
         <summary><h3 class="cv-h"><span class="en">Conference Presentations &amp; Guest Lectures</span><span class="zh">会议报告与客座讲座</span></h3></summary>
         <div class="cv-body">
           <ul class="runs">
@@ -856,7 +858,7 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
     </div>
 
     <div class="cv-group">
-      <details>
+      <details open>
         <summary><h3 class="cv-h"><span class="en">Teaching &amp; Mentorship</span><span class="zh">教学与指导</span></h3></summary>
         <div class="cv-body">
           <p class="sub-h"><span class="en">Graduate Teaching Associate, The Ohio State University</span><span class="zh">俄亥俄州立大学 研究生助教</span></p>
@@ -880,7 +882,7 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
     </div>
 
     <div class="cv-group">
-      <details>
+      <details open>
         <summary><h3 class="cv-h"><span class="en">Organizing, Editorial &amp; Service</span><span class="zh">组织、编辑与服务</span></h3></summary>
         <div class="cv-body">
           <ul class="runs">
@@ -898,7 +900,7 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
     </div>
 
     <div class="cv-group">
-      <details>
+      <details open>
         <summary><h3 class="cv-h"><span class="en">Scholarships &amp; Awards</span><span class="zh">奖学金与荣誉</span></h3></summary>
         <div class="cv-body">
           <ul class="runs">
@@ -914,7 +916,7 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
     </div>
 
     <div class="cv-group">
-      <details>
+      <details open>
         <summary><h3 class="cv-h"><span class="en">Training: Seminars, Workshops &amp; Summer Schools</span><span class="zh">研修：研讨班、工作坊与暑期学校</span></h3></summary>
         <div class="cv-body">
           <ul class="runs">
@@ -931,7 +933,7 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
     </div>
 
     <div class="cv-group">
-      <details>
+      <details open>
         <summary><h3 class="cv-h"><span class="en">Capabilities, Languages &amp; Memberships</span><span class="zh">能力、语言与学会</span></h3></summary>
         <div class="cv-body">
           <div class="grid2">
