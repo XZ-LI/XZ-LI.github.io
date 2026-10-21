@@ -459,20 +459,19 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
             <h3>Novel Pipeline<span class="cn">长篇网文流水线</span></h3>
             <span class="pill">Open source</span>
           </div>
-            <p class="role"><span class="en">Prompt architecture &amp; agent tooling · writing-craft codification · evaluation — 2026</span><span class="zh">提示词架构与 agent 工具 · 写作手艺规则化 · 评测 — 2026</span></p>
+            <p class="role"><span class="en">Memory architecture · writing-craft codification · evaluation — 2026</span><span class="zh">记忆架构 · 写作手艺规则化 · 评测 — 2026</span></p>
           </summary>
           <div class="proj-body">
             <div>
               <p>
-            <span class="en">A pipeline that writes a Chinese webnovel and keeps updating it. Writing one good chapter is easy; the hard part is that chapter 200 still remembers what chapter 3 planted. Six hundred thousand characters do not fit in any context window, so the work is memory architecture, not prose generation. It installs as a Claude Code skill, but the eleven scripts carry zero vendor dependency — Cursor, Codex CLI, Cline, Copilot and Aider each get a generated entry file pointing at one shared guide, and the whole thing runs from the command line with no agent at all.</span>
-            <span class="zh">一条写中文长篇网文并持续更新的流水线。写好一章不难，难的是第 200 章还记得第 3 章埋的伏笔。六十万字装不进任何上下文窗口，所以这件事的本体是记忆架构，不是文本生成。装进 Claude Code 是一个 skill，但 11 个脚本零厂商依赖——Cursor、Codex CLI、Cline、Copilot、Aider 各自生成一份入口文件，全部指回同一份指南；完全不用 agent，直接命令行也跑得通。</span>
+            <span class="en">Writing one good chapter is easy. The hard part is that chapter 200 still remembers what chapter 3 planted — and 600,000 characters fit in no context window. So this is a memory-architecture problem, not a prose-generation one. The pipeline covers premise, chapters, self-diagnosis and scheduled publishing to Chinese platforms; Chinese web fiction is the upstream of short drama and adaptation worldwide, and judging it at volume is a literature problem before it is an engineering one.</span>
+            <span class="zh">写好一章不难，难的是第 200 章还记得第 3 章埋的伏笔——而六十万字装不进任何上下文窗口。所以这是记忆架构问题，不是文本生成问题。流水线覆盖立项、续写、自检、定时发章；中文网文是全球短剧与影视改编的上游，要在规模上判断这类内容，首先是文学问题，其次才是工程问题。</span>
           </p>
           <ul class="did">
-            <li><span class="en">Six memory layers, each with its own refresh rate: hard constraints that void a chapter if broken, a story bible, a ledger of unpaid foreshadowing, one digest per 30-chapter arc, the current arc plan, and the last ten summaries plus two full chapters. Measured with tiktoken, input stops growing after chapter 10 — about 20k tokens whether you are on chapter 50 or chapter 1,000.</span><span class="zh">六层记忆，各有自己的刷新频率：违反即废章的硬约束、故事圣经、未兑现伏笔的台账、每 30 章一段的往事提要、当前弧线计划，以及最近十章摘要加两章全文。用 tiktoken 实测，输入量在第 10 章之后不再增长——第 50 章和第 1,000 章都是约两万 token。</span></li>
-            <li><span class="en">Derived the genre rules from a 1,110-novel corpus rather than writing them by hand: per-genre dimensions reverse-engineered from each category's top-rated works (370 weighted criteria with explicit 9–10 and sub-5 anchors), then writing rules grown through 10–15 rounds of generate → score → rewrite-the-rules. Measured the mechanism that makes this work: a seed carrying imitable excerpts yields 85 characters of articulated rules per round, a seed without them yields 744 — so the excerpt-free switch is what makes any genre reproducible.</span><span class="zh">题材规则不是手写的，而是从 1,110 部作品的语料库反推：每个品类取同类高分作品反推维度（370 项带权重的标准，各附 9–10 分与 5 分以下的判分锚点），写作细则再经「生成→打分→改写规则」迭代 10–15 轮攒出。并量出了其中的机制：种子里带可模仿的节选时每轮只攒 85 字明文规则，撤掉节选则 744 字——这个开关才是任一品类都能复现的关键。</span></li>
-            <li><span class="en">Found that one genre's rule layer was 4,894 characters while the other six were 899–1,138, audited the thick one line by line, and found 81% of it was genre-independent craft. Promoted those 31 rules to a shared layer, bringing all 37 genres to the same rule density — measured at 5,100–5,500 tokens of rules whichever genre you pick.</span><span class="zh">发现一个品类的规则层有 4,894 字，另外六个只有 899–1,138 字；逐条审计那个厚规则层，81% 与品类无关。把这 31 条提升为共享层，37 个品类的规则密度就此拉平——实测无论选哪个品类，进提示词的规则都在 5,100–5,500 token。</span></li>
-            <li><span class="en">Ran the skill end to end and fixed what it exposed: an arc planner that rewrote already-written chapters, craft labels leaking into prose, a cleaner deleting the deliberate two-character paragraphs the genre rules demand, a mute protagonist who spoke four times in one chapter, and a foreshadowing ledger logging every unexplained noun until it became noise.</span><span class="zh">端到端跑了一遍，并修掉它暴露出的问题：弧线计划会重写已写好的章节；写作技巧标签漏进正文；清洗器把品类规则明确要求的两字短句段落整行删掉；设定为哑巴的主角一章里说了四次话；伏笔台账把每个未解释的名词都登记，直到变成噪音。</span></li>
-            <li><span class="en">Measured whether the genre templates actually help instead of assuming it: 109 API-free regression checks, a 21-query trigger suite run against fresh CLI sessions, and an A/B holding the project identical so the only variable was the template. The score gap was +0.22 under the model that also wrote the chapters and +0.06 under an independent judge — too small to claim, and I documented it as such. What did hold was paragraph-shape consistency across chapters, and a blind pass caught a defect the scorer missed entirely.</span><span class="zh">没有假定题材模版有用，而是去测：109 项不调 API 的回归自检、21 条提问对全新 CLI 会话跑的触发测试，以及把项目完全复制、只留模版一个变量的 A/B。写手自评差 +0.22，换独立评委只剩 +0.06——太小，不足以下结论，文档里就这么写。真正站得住的是章与章之间的段落形态一致性；另有一轮盲评抓到了评分器完全没发现的缺陷。</span></li>
+            <li><span class="en">Six memory layers with separate refresh rates — inviolable constraints, story bible, a ledger of unpaid setups, one digest per 30-chapter arc, the current arc plan, recent summaries and prose. Measured with tiktoken, input flattens after chapter 10: chapter 1,000 costs what chapter 50 does.</span><span class="zh">六层记忆，各有刷新频率——不可违反的硬约束、故事圣经、未兑现伏笔的台账、每 30 章一段的往事提要、当前弧线计划、近期摘要与原文。用 tiktoken 实测，输入量在第 10 章后持平：第 1,000 章和第 50 章同价。</span></li>
+            <li><span class="en">Genre rules reverse-engineered from a 1,110-novel corpus rather than hand-written: 370 weighted criteria derived per genre from its top-rated works, then rules grown over 10–15 rounds of generate → score → rewrite-the-rules. Measured the mechanism — a seed carrying imitable excerpts yields 85 characters of articulated rules per round, a seed without them yields 744.</span><span class="zh">题材规则不是手写的，而是从 1,110 部作品的语料库反推：每个品类从同类高分作品推出 370 项带权重的标准，写作细则再经「生成→打分→改写规则」迭代 10–15 轮。并量出其中的机制：种子里带可模仿的节选时每轮只攒 85 字明文规则，撤掉节选则 744 字。</span></li>
+            <li><span class="en">Audited the one genre whose rule layer had grown to 4,894 characters while six others sat at 899–1,138: 81% of it was genre-independent craft. Promoting those 31 rules to a shared layer levelled all 37 genres to the same rule density.</span><span class="zh">审计唯一一个规则层涨到 4,894 字的品类（另外六个只有 899–1,138 字）：其中 81% 与品类无关。把这 31 条提为共享层，37 个品类的规则密度就此拉平。</span></li>
+            <li><span class="en">Ran it end to end and fixed what that exposed — an arc planner rewriting finished chapters, craft labels leaking into prose, a mute protagonist speaking four times. Then measured rather than assumed: the template A/B gap was +0.22 under the model that wrote the chapters and +0.06 under an independent judge, too small to claim, and a blind pass caught a defect the scorer missed entirely.</span><span class="zh">端到端跑一遍，修掉它暴露的问题——弧线计划重写已完成章节、写作技巧标签漏进正文、设定为哑巴的主角一章说了四次话。随后不靠假定而去测量：模版 A/B 的差距在写手自评下 +0.22，换独立评委只剩 +0.06，太小不足以下结论；另有一轮盲评抓到了评分器完全没发现的缺陷。</span></li>
           </ul>
             </div>
             <div class="aside">
@@ -481,14 +480,12 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
             <dd><a class="visit" href="https://github.com/XZ-LI/ai-webnovel-pipeline" target="_blank" rel="noopener">ai-webnovel-pipeline</a></dd>
             <dt><span class="en">Derived from</span><span class="zh">规则来源</span></dt>
             <dd><span class="en">1,110-novel corpus · 370 weighted criteria · 10–15 iteration rounds per mature genre</span><span class="zh">1,110 部语料 · 370 项带权重维度 · 成熟品类各迭代 10–15 轮</span></dd>
-            <dt><span class="en">Genre templates</span><span class="zh">题材模版</span></dt>
-            <dd><span class="en">37 genres · 19 male-channel, 18 female-channel · weighted rubrics, opening hooks, reader expectations</span><span class="zh">37 个题材 · 男频 19、女频 18 · 带权重评分维度、开局钩子、读者预期</span></dd>
+            <dt><span class="en">Scope</span><span class="zh">覆盖范围</span></dt>
+            <dd><span class="en">37 genre templates · premise options → chapters → diagnosis and revision → scheduled publishing</span><span class="zh">37 个题材模版 · 立项选项 → 续写 → 诊断改稿 → 定时发章</span></dd>
             <dt><span class="en">Runs in</span><span class="zh">可用环境</span></dt>
             <dd class="stack"><span>Claude Code</span><span>Cursor</span><span>Codex CLI</span><span>Cline</span><span>Copilot</span><span>Aider</span><span>plain CLI</span></dd>
-            <dt><span class="en">Model-agnostic</span><span class="zh">模型无关</span></dt>
-            <dd class="stack"><span>OpenAI</span><span>DeepSeek</span><span>Qwen</span><span>Kimi</span><span>GLM</span><span>Ollama</span></dd>
             <dt><span class="en">Built with</span><span class="zh">技术栈</span></dt>
-            <dd class="stack"><span>Python</span><span>Claude Code skills</span><span>tiktoken</span><span>Playwright</span></dd>
+            <dd class="stack"><span>Python</span><span>tiktoken</span><span>Playwright</span><span>OpenAI-compatible APIs</span></dd>
           </dl>
         </div>
           </div>
@@ -563,38 +560,6 @@ footer p{color:var(--ink-2);max-width:var(--measure);margin:0 0 1.75rem}
             <dd class="stack"><span>Python</span><span>FastAPI</span><span>Automated collection</span><span>Weibo API</span></dd>
             <dt><span class="en">Audience</span><span class="zh">面向</span></dt>
             <dd><span class="en">Chinese fan communities; creator-management and entertainment content teams.</span><span class="zh">中文粉丝社群；创作者经纪与娱乐内容团队。</span></dd>
-          </dl>
-        </div>
-          </div>
-        </details>
-      </article>
-
-      <article class="proj">
-        <details>
-          <summary>
-            <div class="proj-head">
-            <h3>Webnovel Auto</h3>
-            <span class="pill building"><span class="en">In development</span><span class="zh">开发中</span></span>
-          </div>
-            <p class="role"><span class="en">Genre research · corpus design · editorial workflow — 2026</span><span class="zh">类型研究 · 语料设计 · 编辑流程 — 2026</span></p>
-          </summary>
-          <div class="proj-body">
-            <div>
-              <p>
-            <span class="en">An end-to-end AI writing and publishing workflow for Chinese web fiction. Each platform and each genre — <em>xuanhuan</em>, romance, urban — gets its own corpus, so the model learns how that particular readership expects a chapter to open, turn and end. Generated chapters then publish and update on a schedule.</span>
-            <span class="zh">面向中文网文的端到端 AI 写作与发布流程。按站点和题材分别建库——玄幻、言情、都市各成一套语料，让模型学会该类读者期待的开篇、转折与收尾。生成章节按计划自动发布与更新。</span>
-          </p>
-          <ul class="did">
-            <li><span class="en">The interesting part is not generation but taste: deciding what a genre's conventions actually are, and where a model breaks them badly enough that a reader drops the book.</span><span class="zh">有趣的不是生成，而是判断力：确定某一类型的成规究竟是什么，以及模型在哪里破坏它到读者弃书的程度。</span></li>
-            <li><span class="en">Comparative evaluation of generation workflows across multiple model providers.</span><span class="zh">跨多家模型供应商对生成流程做对照评测。</span></li>
-          </ul>
-            </div>
-            <div class="aside">
-          <dl>
-            <dt><span class="en">Built with</span><span class="zh">技术栈</span></dt>
-            <dd class="stack"><span>OpenAI</span><span>DeepSeek</span><span>Python</span><span>Scheduled deploys</span></dd>
-            <dt><span class="en">Why it matters</span><span class="zh">意义</span></dt>
-            <dd><span class="en">Chinese web fiction is the pipeline feeding short drama and adaptation worldwide. Judging that content at volume is a literature problem.</span><span class="zh">中文网文是全球短剧与影视改编的上游。要在规模上判断这类内容，本质是一个文学问题。</span></dd>
           </dl>
         </div>
           </div>
