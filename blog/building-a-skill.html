@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en"
+      data-title-en="Building a skill for someone who isn’t me — Xuezhao Li"
+      data-title-zh="把一个 skill 建给不是我的人用 — 李学昭">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Seventeen commits over four days turned a private Chinese web-fiction writing pipeline into a skill a stranger could run. Notes on removed assumptions, and on testing a system whose output has no correct answer.">
+<meta name="author" content="Xuezhao Li">
+<link rel="canonical" href="https://xz-li.github.io/blog/building-a-skill.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E%F0%9F%8E%AD%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Xuezhao Li">
+<meta property="og:title" content="Building a skill for someone who isn’t me">
+<meta property="og:description" content="Seventeen commits over four days. Almost none of them went into the writing engine.">
+<meta property="og:url" content="https://xz-li.github.io/blog/building-a-skill.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<style>:root{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Building a skill for someone who isn’t me</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+(function(){
+  var r=document.documentElement;
+  var l="en",t=null;
+  try{l=localStorage.getItem("xl-lang")||"en";t=localStorage.getItem("xl-theme")}catch(e){}
+  r.dataset.lang=(l==="zh")?"zh":"en";
+  if(t==="dark"||t==="light")r.dataset.theme=t;
+})();
+</script>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap">
+    <a class="mark" href="../index.html#top"><b>Xuezhao Li</b> <span class="en">/ 李学昭</span><span class="zh">/ 李学昭</span></a>
+    <nav class="topnav">
+      <a href="../index.html#creations"><span class="en">Creations</span><span class="zh">作品</span></a>
+      <a href="../index.html#projects"><span class="en">Projects</span><span class="zh">项目</span></a>
+      <a href="../index.html#content-design"><span class="en">Content</span><span class="zh">内容</span></a>
+      <a href="../index.html#localization"><span class="en">Translation</span><span class="zh">翻译</span></a>
+      <a href="../index.html#cv"><span class="en">CV</span><span class="zh">履历</span></a>
+      <a href="../index.html#blog"><span class="en">Blog</span><span class="zh">博客</span></a>
+      <a href="../index.html#contact"><span class="en">Contact</span><span class="zh">联系</span></a>
+    </nav>
+    <div class="toggles">
+      <button class="tog" id="lang-btn" type="button">中文</button>
+      <button class="tog" id="theme-btn" type="button" aria-label="Switch color theme">◐</button>
+    </div>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow"><span class="en">Blog · build log</span><span class="zh">博客 · 构建记录</span></p>
+    <h1 class="post-title"><span class="en">Building a skill for someone who isn’t me</span><span class="zh">把一个 skill 建给不是我的人用</span></h1>
+    <!-- 导读句，若要换文案改这两行 -->
+    <p class="thesis">
+      <span class="en">Seventeen commits over four days turned a pipeline that wrote Chinese web serials into something a stranger could run. Almost none of that work went into the writing engine.</span>
+      <span class="zh">四天十七次提交，把一套自己能用的中文网文写作流程，改造成一个陌生人也能跑起来的东西。这些工作几乎没有一条花在写作引擎上。</span>
+    </p>
+    <div class="meta-row">
+      <span class="chip"><span class="en">October 2026</span><span class="zh">2026 年 10 月</span></span>
+      <span class="chip"><span class="en">17 commits · 4 days</span><span class="zh">17 次提交 · 4 天</span></span>
+      <a class="chip primary" href="../index.html#blog"><span class="en">← All posts</span><span class="zh">← 返回博客</span></a>
+    </div>
+  </div>
+</header>
+
+<section id="post">
+  <div class="wrap">
+    <article class="proj">
+      <div class="proj-body">
+        <div class="prose">
+          <h2 id="memory"><span class="en">The hard part was never writing a chapter</span><span class="zh">难的从来不是写出一章</span></h2>
+
+          <p class="en">A serialized Chinese web novel runs several hundred chapters and six hundred thousand characters. No model holds that in context. So the difficulty is not producing one good chapter — a competent model does that on the first try. The difficulty is that chapter 200 has to remember a detail planted in chapter 3, and has to still believe it.</p>
+          <p class="zh">一本连载的中文网络小说动辄几百章、六十万字。没有任何模型的上下文装得下。所以难点不是写出一章好文字——这件事稍微像样的模型第一次就能做到。难点是第 200 章还要记得第 3 章埋下的那个细节，而且还得认它。</p>
+
+          <p class="en">Everything else in the design follows from that one constraint. What a chapter can see is a layered memory, each layer holding a different kind of fact that decays at a different rate:</p>
+          <p class="zh">整个设计都是从这一条约束长出来的。写一章时能看到的是一套分层记忆，每一层装着一类衰减速度不同的事实：</p>
+
+          <ul class="layers">
+            <li><b>hard_constraints</b><span><span class="en">Lines that must never move. Checked, not summarized.</span><span class="zh">绝对不能动的红线。是被核对的，不是被压缩的。</span></span></li>
+            <li><b><span class="en">story bible</span><span class="zh">故事圣经</span></b><span><span class="en">What is permanently true — names, relations, the shape of the world.</span><span class="zh">永远为真的东西——名字、关系、世界的形状。</span></span></li>
+            <li><b><span class="en">foreshadowing ledger</span><span class="zh">伏笔台账</span></b><span><span class="en">Debts taken on and not yet repaid. A novel’s most forgettable asset.</span><span class="zh">欠下还没还的债。一本小说里最容易被忘掉的资产。</span></span></li>
+            <li><b>character.knows</b><span><span class="en">Who knows what, and since when. Information boundaries are where long fiction breaks first.</span><span class="zh">谁知道什么、从什么时候起知道。长篇最先垮掉的地方就是信息边界。</span></span></li>
+            <li><b><span class="en">arc recaps</span><span class="zh">往事提要</span></b><span><span class="en">Distant history, compressed to one paragraph per arc.</span><span class="zh">久远的事，每条弧线压成一段。</span></span></li>
+            <li><b><span class="en">arc plan</span><span class="zh">弧线计划</span></b><span><span class="en">What this stretch of the book has promised to deliver.</span><span class="zh">这一段书答应要兑现的东西。</span></span></li>
+            <li><b><span class="en">last 10 summaries</span><span class="zh">最近 10 章摘要</span></b><span><span class="en">Short-term continuity — and the layer with the sharpest edge.</span><span class="zh">短期连贯性——也是边界最锋利的一层。</span></span></li>
+            <li><b><span class="en">last 2 chapters, raw</span><span class="zh">最近 2 章原文</span></b><span><span class="en">Voice. Summaries lose prose rhythm; only the text carries it.</span><span class="zh">文风。摘要会丢掉语感，只有原文带得动。</span></span></li>
+          </ul>
+
+          <div class="pull">
+            <p class="en"><strong>Only the last ten summaries enter the context.</strong> Everything older is carried entirely by the layers above them. That single cutoff is the reason the foreshadowing ledger, the information boundaries and the arc recaps exist at all — each one is a specific kind of fact that would otherwise fall off the edge of chapter ten and never come back.</p>
+            <p class="zh"><strong>进上下文的摘要只有最近十章。</strong>更早的全部由上面那几层承载。正是这一条截断，才是伏笔台账、信息边界、往事提要存在的全部理由——每一样都是一类特定的事实，否则它们会从第十章的边缘掉下去，再也回不来。</p>
+          </div>
+
+          <h2 id="assumptions"><span class="en">The rewrite that mattered: the user is not me</span><span class="zh">真正的重写：使用者不是我</span></h2>
+
+          <p class="en">The first version worked. It worked on my machine, through my coding agent, against a model my network could reach, with keys I had already configured. Read as a list, the commits that followed are not features. They are assumptions being removed one at a time:</p>
+          <p class="zh">第一版是能跑的。在我的机器上、通过我用的编程助手、连着我的网络能连上的模型、用我早就配好的 key。后面那串提交，当成清单读的话，它们不是功能，而是一条一条被拆掉的假设：</p>
+
+          <ul>
+            <li><span class="en"><strong>Assumed one agent.</strong> Unbound from any single tool; entry files generated for several, including Qoder and Trae, the two most used in mainland China.</span><span class="zh"><strong>假设了只有一个 agent。</strong>解除与单一工具的绑定；为多家生成入口文件，包括大陆最常用的 Qoder 和 Trae。</span></li>
+            <li><span class="en"><strong>Assumed OpenAI was reachable.</strong> For a user writing Chinese web fiction from inside mainland China, it is not. The default moved to DeepSeek.</span><span class="zh"><strong>假设 OpenAI 连得上。</strong>对一个在大陆写中文网文的人来说，连不上。默认改成了 DeepSeek。</span></li>
+            <li><span class="en"><strong>Assumed Python and an API key.</strong> Added an environment doctor, a one-command key setup, and a route through for someone who has never seen either.</span><span class="zh"><strong>假设用户懂 Python、有 API key。</strong>加了环境自诊、一条命令配 key，以及一条给从没见过这两样东西的人走的路。</span></li>
+            <li><span class="en"><strong>Assumed one kind of reader.</strong> The README now forks by reader on line one, instead of making a novelist read installation notes to find out whether this is for them.</span><span class="zh"><strong>假设读者只有一种。</strong>README 现在第一行就按读者分叉，而不是让一个写小说的人先读完安装说明，才知道这东西是不是给他的。</span></li>
+          </ul>
+
+          <p class="en">The capability was never the bottleneck. The preconditions were. A tool that requires its user to already be its author is not a tool yet, and the distance between those two states turned out to be most of the work.</p>
+          <p class="zh">瓶颈从来不在能力，而在前置条件。一个要求使用者先变成作者本人才能用的工具，还不算工具；而这两种状态之间的距离，才是绝大部分工作量。</p>
+
+          <h2 id="testing"><span class="en">How do you know you didn’t break it?</span><span class="zh">怎么知道你没把它改坏？</span></h2>
+
+          <p class="en">Here is the part I expected to be hardest, and was. The output is fiction. There is no correct answer to compare against, no assertion that says a chapter is right. Change one line of a prompt and you cannot tell from reading whether anything downstream quietly stopped working.</p>
+          <p class="zh">这是我预期最难、结果也确实最难的部分。产出是小说。没有正确答案可以对照，没有任何断言能判定一章「对」。改一行提示词，你光读是读不出来下游有没有什么东西悄悄不工作了。</p>
+
+          <p class="en">So I stopped trying to test the prose and tested everything around it that <em>is</em> deterministic. Three layers, none of which calls a paid API:</p>
+          <p class="zh">于是我不再试图测文字本身，转而去测它周围所有<em>确定</em>的东西。三层，没有一层会调用付费接口：</p>
+
+          <h3><span class="en">194 deterministic self-checks</span><span class="zh">194 项确定性自检</span></h3>
+          <p class="en">Structure, file contracts, state transitions, template integrity. Runs in seconds, costs nothing, and is the thing a user runs after editing the skill to confirm they haven’t broken it.</p>
+          <p class="zh">结构、文件契约、状态流转、模版完整性。几秒跑完，不花钱，是用户改完 skill 之后用来确认没改坏的那一下。</p>
+
+          <h3><span class="en">A 21-query trigger set — and the 10 negatives are the test</span><span class="zh">21 条触发测试——10 条反例才是真正的考题</span></h3>
+          <p class="en">A skill has to fire on the right requests and stay quiet on the wrong ones. Eleven queries should trigger it. Ten should not, and those ten are the whole point, because they share its vocabulary: <em>write me a year-end summary</em>; <em>analyze the genre distribution of the top fifty on Fanqie</em>; <em>my novel site is returning a 500, check the logs</em>; <em>what should I watch for in this novel’s licensing contract</em>. Every one of them contains a word the skill is listening for. A description written even slightly too broadly passes all eleven positives and fails these — and the failure is invisible unless you wrote the negatives down first.</p>
+          <p class="zh">一个 skill 既要在该触发时触发，也要在不该触发时闭嘴。11 条提问应该触发它。10 条不应该，而这 10 条才是全部重点，因为它们和它共用词汇：<em>帮我写一篇年终总结</em>；<em>分析番茄免费榜前五十的题材分布</em>；<em>我的小说网站报 500，帮我看日志</em>；<em>这本小说的版权合同该注意什么</em>。每一条里都有这个 skill 正在监听的词。描述只要写得稍微宽一点，11 条正例全过，这 10 条全挂——而且除非你事先把反例写下来，否则这种失败你根本看不见。</p>
+
+          <h3><span class="en">The self-check checks the documentation’s own numbers</span><span class="zh">让自检去核对文档自己的数字</span></h3>
+          <p class="en">Documentation makes quantitative claims — how many checks, how many scripts, how many genre templates — and those claims rot silently, because nobody goes back to recount. So the suite greps its own docs for advertised figures and fails when they disagree with reality. It had to: after a few dozen checks were added, two files still advertised 132 and a third said 104, when the real count had reached 163.</p>
+          <p class="zh">文档会给出可量化的承诺——多少项检查、多少个脚本、多少个题材模版——而这类承诺会无声地烂掉，因为没有人会回头重数一遍。所以自检会去抓自己文档里的宣传数字，对不上就判失败。这条是被逼出来的：加了几十项检查之后，两个文件还写着 132、第三个写着 104，而真实数字已经到了 163。</p>
+
+          <div class="pull">
+            <p class="en">A guard is only as wide as its pattern. That check matches several phrasings of “<em>N</em> checks” — and a stale 97 in a differently-worded line slipped straight past it. The lesson is not that the guard was wrong to exist. It is that a guard against drift is itself a thing that drifts, and the only reason I found this one is that I went back and ran the count by hand before quoting it here.</p>
+            <p class="zh">一道防线的宽度，不会超过它那条正则。那项检查能匹配好几种「<em>N</em> 项检查」的写法——而另一种措辞里一个过期的 97 就这么直接溜了过去。教训不是这道防线不该存在，而是：防漂移的机制本身也会漂移；我之所以发现它，只是因为要把这个数字写进这篇文章，所以回头手动数了一遍。</p>
+          </div>
+
+          <h2 id="carries-over"><span class="en">What carries over</span><span class="zh">可以带走的部分</span></h2>
+
+          <p class="en">Three things, none of them specific to fiction. Write the negative cases first, because a system that only ever sees what it should match will look perfect. When there is no ground truth, test the deterministic shell around the thing you cannot score, rather than giving up on testing. And treat documentation as an artifact under test, because every number in it is a claim, and claims decay faster than code.</p>
+          <p class="zh">三件事，没有一件是小说特有的。先写反例，因为一个只见过「该匹配什么」的系统看起来永远完美。没有标准答案时，去测你没法打分的那个东西周围那层确定的壳，而不是干脆放弃测试。以及，把文档当作被测对象，因为文档里的每一个数字都是一句承诺，而承诺烂得比代码快。</p>
+        </div>
+
+        <div class="aside sticky">
+          <dl>
+            <dt><span class="en">Contents</span><span class="zh">目录</span></dt>
+            <dd>
+              <ol class="toc">
+                <li><a href="#memory"><span class="en">The hard part was never writing a chapter</span><span class="zh">难的从来不是写出一章</span></a></li>
+                <li><a href="#assumptions"><span class="en">The rewrite that mattered: the user is not me</span><span class="zh">真正的重写：使用者不是我</span></a></li>
+                <li><a href="#testing"><span class="en">How do you know you didn’t break it?</span><span class="zh">怎么知道你没把它改坏？</span></a></li>
+                <li><a href="#carries-over"><span class="en">What carries over</span><span class="zh">可以带走的部分</span></a></li>
+              </ol>
+            </dd>
+            <dt><span class="en">Repository</span><span class="zh">仓库</span></dt>
+            <dd><a class="visit" href="https://github.com/XZ-LI/ai-webnovel-pipeline" target="_blank" rel="noopener">github.com/XZ-LI/ai-webnovel-pipeline</a></dd>
+            <dt><span class="en">Scale</span><span class="zh">规模</span></dt>
+            <dd><span class="en">37 genre templates · 15 scripts · 194 deterministic self-checks · 21 trigger queries</span><span class="zh">37 个题材模版 · 15 个脚本 · 194 项确定性自检 · 21 条触发测试</span></dd>
+            <dt><span class="en">Built with</span><span class="zh">技术栈</span></dt>
+            <dd><div class="stack"><span>Python</span><span>DeepSeek</span><span>Qwen</span><span>OpenAI-compatible APIs</span></div></dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="post-foot">
+        <a class="chip" href="../index.html#blog"><span class="en">← All posts</span><span class="zh">← 返回博客</span></a>
+        <a class="chip" href="https://github.com/XZ-LI/ai-webnovel-pipeline" target="_blank" rel="noopener">ai-webnovel-pipeline</a>
+        <a class="chip primary" href="mailto:li.11365@osu.edu">li.11365@osu.edu</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>
