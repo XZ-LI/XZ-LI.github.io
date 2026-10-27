@@ -116,20 +116,20 @@
             <p class="zh"><strong>进上下文的摘要只有最近十章。</strong>更早的全部由上面那几层承载。正是这一条截断，才是伏笔台账、信息边界、往事提要存在的全部理由——每一样都是一类特定的事实，否则它们会从第十章的边缘掉下去，再也回不来。</p>
           </div>
 
-          <h2 id="assumptions"><span class="en">The rewrite that mattered: the user is not me</span><span class="zh">真正的重写：使用者不是我</span></h2>
+          <h2 id="assumptions"><span class="en">Why it works even if you’ve never coded</span><span class="zh">为什么不会编程也能用</span></h2>
 
-          <p class="en">The first version worked. It worked on my machine, through my coding agent, against a model my network could reach, with keys I had already configured. Read as a list, the commits that followed are not features. They are assumptions being removed one at a time:</p>
-          <p class="zh">第一版是能跑的。在我的机器上、通过我用的编程助手、连着我的网络能连上的模型、用我早就配好的 key。后面那串提交，当成清单读的话，它们不是功能，而是一条一条被拆掉的假设：</p>
+          <p class="en">The first version only ran on my own computer, where everything it needed was already set up. A beginner would have got stuck at four places. Here is what each one looks like for you now:</p>
+          <p class="zh">第一版只能在我自己的电脑上跑，因为它需要的东西我早就装好、配好了。换一个新手来用，会卡在四个地方。下面是现在每一处对你来说是什么样：</p>
 
           <ul>
-            <li><span class="en"><strong>Assumed one agent.</strong> Unbound from any single tool; entry files generated for several, including Qoder and Trae, the two most used in mainland China.</span><span class="zh"><strong>假设了只有一个 agent。</strong>解除与单一工具的绑定；为多家生成入口文件，包括大陆最常用的 Qoder 和 Trae。</span></li>
-            <li><span class="en"><strong>Assumed OpenAI was reachable.</strong> For a user writing Chinese web fiction from inside mainland China, it is not. The default moved to DeepSeek.</span><span class="zh"><strong>假设 OpenAI 连得上。</strong>对一个在大陆写中文网文的人来说，连不上。默认改成了 DeepSeek。</span></li>
-            <li><span class="en"><strong>Assumed Python and an API key.</strong> Added an environment doctor, a one-command key setup, and a route through for someone who has never seen either.</span><span class="zh"><strong>假设用户懂 Python、有 API key。</strong>加了环境自诊、一条命令配 key，以及一条给从没见过这两样东西的人走的路。</span></li>
-            <li><span class="en"><strong>Assumed one kind of reader.</strong> The README now forks by reader on line one, instead of making a novelist read installation notes to find out whether this is for them.</span><span class="zh"><strong>假设读者只有一种。</strong>README 现在第一行就按读者分叉，而不是让一个写小说的人先读完安装说明，才知道这东西是不是给他的。</span></li>
+            <li><span class="en"><strong>Use whichever AI assistant you have.</strong> Qoder and Trae are the easiest in mainland China; Claude Code, Cursor and several others work too. Without any assistant, you can still run it from the command line.</span><span class="zh"><strong>手上有哪个 AI 助手就用哪个。</strong>大陆用 Qoder、Trae 最省事，Claude Code、Cursor 等也都能用。一个助手都没有，直接敲命令也能跑。</span></li>
+            <li><span class="en"><strong>You don’t need OpenAI.</strong> It uses DeepSeek by default, which works from mainland China and is cheap: ten-odd chapters cost about a dollar.</span><span class="zh"><strong>不需要 OpenAI。</strong>默认用 DeepSeek，大陆直接能连，而且便宜：写十几章大约几块钱。</span></li>
+            <li><span class="en"><strong>You don’t need to know Python or what an API key is.</strong> The AI runs a built-in checkup, installs whatever is missing, and walks you through getting a key. Your only job is to sign up and paste the key back.</span><span class="zh"><strong>不用懂 Python，也不用知道 API key 是什么。</strong>AI 会跑一遍自带的环境检查，缺什么装什么，再一步步带你拿到 key。你要做的只是注册账号，把 key 贴回给它。</span></li>
+            <li><span class="en"><strong>You know right away whether it’s for you.</strong> The README’s first question is which kind of user you are. If you don’t code, it sends you straight to the five-minute start, with no installation notes to wade through.</span><span class="zh"><strong>一眼就知道适不适合你。</strong>README 第一句就问你属于哪种用户。不会编程的话，直接跳到「零基础五分钟开始」，不用先啃一堆安装说明。</span></li>
           </ul>
 
-          <p class="en">The capability was never the bottleneck. The preconditions were. A tool that requires its user to already be its author is not a tool yet, and the distance between those two states turned out to be most of the work.</p>
-          <p class="zh">瓶颈从来不在能力，而在前置条件。一个要求使用者先变成作者本人才能用的工具，还不算工具；而这两种状态之间的距离，才是绝大部分工作量。</p>
+          <p class="en">The writing engine barely changed along the way. What changed was everything you would otherwise have had to figure out before writing your first line.</p>
+          <p class="zh">这一路上，写作引擎本身几乎没动。变的是那些你本来要先自己搞懂、才能写出第一行字的东西。</p>
 
           <h2 id="testing"><span class="en">How do you know you didn’t break it?</span><span class="zh">怎么知道你没把它改坏？</span></h2>
 
@@ -169,7 +169,7 @@
               <ol class="toc">
                 <li><a href="#start"><span class="en">No coding needed: three steps to start</span><span class="zh">不会编程也能用：三步开始</span></a></li>
                 <li><a href="#memory"><span class="en">The hard part was never writing a chapter</span><span class="zh">难的从来不是写出一章</span></a></li>
-                <li><a href="#assumptions"><span class="en">The rewrite that mattered: the user is not me</span><span class="zh">真正的重写：使用者不是我</span></a></li>
+                <li><a href="#assumptions"><span class="en">Why it works even if you’ve never coded</span><span class="zh">为什么不会编程也能用</span></a></li>
                 <li><a href="#testing"><span class="en">How do you know you didn’t break it?</span><span class="zh">怎么知道你没把它改坏？</span></a></li>
                 <li><a href="#carries-over"><span class="en">What carries over</span><span class="zh">可以带走的部分</span></a></li>
               </ol>
