@@ -150,25 +150,25 @@
             <p class="zh"><strong>写给开发者。</strong>如果你只是想写小说，读到这里就够了。下面两节讲的是这个工具本身怎么测试，以及做它的过程中学到的东西。</p>
           </div>
 
-          <h2 id="testing"><span class="en">How do you know you didn’t break it?</span><span class="zh">怎么知道你没把它改坏？</span></h2>
+          <h2 id="testing"><span class="en">Changing the tool without breaking it</span><span class="zh">改了东西，怎么确认没改坏</span></h2>
 
-          <p class="en">Here is the part I expected to be hardest, and was. The output is fiction. There is no correct answer to compare against, no assertion that says a chapter is right. Change one line of a prompt and you cannot tell from reading whether anything downstream quietly stopped working.</p>
-          <p class="zh">这是我预期最难、结果也确实最难的部分。产出是小说。没有正确答案可以对照，没有任何断言能判定一章「对」。改一行提示词，你光读是读不出来下游有没有什么东西悄悄不工作了。</p>
+          <p class="en">This was the hardest part. Ordinary software has right answers: a calculator should say 2 + 2 = 4, so you can check it. A chapter of a novel has no “correct” version. If I change one line of the instructions the tool gives the AI, reading the next chapter won’t tell me whether something else quietly stopped working.</p>
+          <p class="zh">这是最难的部分。一般的软件有标准答案：计算器算 2 + 2 就该等于 4，一查就知道对不对。可一章小说没有“正确版本”。我改了工具给 AI 的一行指令，光读下一章，看不出别的地方是不是悄悄坏了。</p>
 
-          <p class="en">So I stopped trying to test the prose and tested everything around it that <em>is</em> deterministic. Three layers, none of which calls a paid API:</p>
-          <p class="zh">于是我不再试图测文字本身，转而去测它周围所有<em>确定</em>的东西。三层，没有一层会调用付费接口：</p>
+          <p class="en">So I don’t test the writing itself. I test everything around it that does have a right answer, in three ways. None of them costs anything to run:</p>
+          <p class="zh">所以我不测小说写得好不好，而是测它周围那些有标准答案的部分。一共三种办法，跑起来都不花钱：</p>
 
-          <h3><span class="en">194 deterministic self-checks</span><span class="zh">194 项确定性自检</span></h3>
-          <p class="en">Structure, file contracts, state transitions, template integrity. Runs in seconds, costs nothing, and is the thing a user runs after editing the skill to confirm they haven’t broken it.</p>
-          <p class="zh">结构、文件契约、状态流转、模版完整性。几秒跑完，不花钱，是用户改完 skill 之后用来确认没改坏的那一下。</p>
+          <h3><span class="en">194 automatic checks</span><span class="zh">194 项自动检查</span></h3>
+          <p class="en">Is every file where it should be? After a chapter, is the story’s memory updated correctly? Are the genre templates complete? It takes a few seconds. Anyone who edits the tool can run it to make sure they haven’t broken anything.</p>
+          <p class="zh">文件是不是都在该在的地方？写完一章，故事记忆有没有正确更新？题材模版是不是完整？几秒钟跑完。谁改了这个工具，跑一遍就知道有没有改坏。</p>
 
-          <h3><span class="en">A 21-query trigger set — and the 10 negatives are the test</span><span class="zh">21 条触发测试——10 条反例才是真正的考题</span></h3>
-          <p class="en">A skill has to fire on the right requests and stay quiet on the wrong ones. Eleven queries should trigger it. Ten should not, and those ten are the whole point, because they share its vocabulary: <em>write me a year-end summary</em>; <em>analyze the genre distribution of the top fifty on Fanqie</em>; <em>my novel site is returning a 500, check the logs</em>; <em>what should I watch for in this novel’s licensing contract</em>. Every one of them contains a word the skill is listening for. A description written even slightly too broadly passes all eleven positives and fails these — and the failure is invisible unless you wrote the negatives down first.</p>
-          <p class="zh">一个 skill 既要在该触发时触发，也要在不该触发时闭嘴。11 条提问应该触发它。10 条不应该，而这 10 条才是全部重点，因为它们和它共用词汇：<em>帮我写一篇年终总结</em>；<em>分析番茄免费榜前五十的题材分布</em>；<em>我的小说网站报 500，帮我看日志</em>；<em>这本小说的版权合同该注意什么</em>。每一条里都有这个 skill 正在监听的词。描述只要写得稍微宽一点，11 条正例全过，这 10 条全挂——而且除非你事先把反例写下来，否则这种失败你根本看不见。</p>
+          <h3><span class="en">21 test requests, and the 10 it should ignore matter most</span><span class="zh">21 条测试请求，最重要的是那 10 条“不该理”的</span></h3>
+          <p class="en">The tool should start when you ask for a novel and stay out of the way otherwise. So I wrote 11 requests that should start it, and 10 that shouldn’t. The 10 are the real test, because they use the same words: <em>write me a year-end summary</em>; <em>analyze the genres of the top fifty on Fanqie</em>; <em>my novel website is showing an error, check the logs</em>; <em>what should I watch for in this novel’s licensing contract</em>. Each one mentions writing or novels. If the tool is set up even a little too loosely, it passes all 11 and wrongly jumps in on these 10 — and you would never notice unless you had written them down in advance.</p>
+          <p class="zh">这个工具应该在你要写小说时启动，其他时候别插手。所以我写了 11 条应该启动它的请求，和 10 条不应该启动的。那 10 条才是真正的考题，因为它们用的是同一批词：<em>帮我写一篇年终总结</em>；<em>分析番茄免费榜前五十的题材分布</em>；<em>我的小说网站报错了，帮我看日志</em>；<em>这本小说的版权合同该注意什么</em>。每一条都提到了写作或小说。工具只要设得稍微宽一点，11 条全过，却会在这 10 条上乱插手——而如果你没有事先把它们写下来，根本发现不了。</p>
 
-          <h3><span class="en">The self-check checks the documentation’s own numbers</span><span class="zh">让自检去核对文档自己的数字</span></h3>
-          <p class="en">Documentation makes quantitative claims — how many checks, how many scripts, how many genre templates — and those claims rot silently, because nobody goes back to recount. So the suite greps its own docs for advertised figures and fails when they disagree with reality. It had to: after a few dozen checks were added, two files still advertised 132 and a third said 104, when the real count had reached 163.</p>
-          <p class="zh">文档会给出可量化的承诺——多少项检查、多少个脚本、多少个题材模版——而这类承诺会无声地烂掉，因为没有人会回头重数一遍。所以自检会去抓自己文档里的宣传数字，对不上就判失败。这条是被逼出来的：加了几十项检查之后，两个文件还写着 132、第三个写着 104，而真实数字已经到了 163。</p>
+          <h3><span class="en">Checking the numbers in the docs</span><span class="zh">核对文档里的数字</span></h3>
+          <p class="en">The docs say things like “194 checks” or “37 genres”. As the project grows, those numbers go out of date, and nobody goes back to recount. So one of the automatic checks counts for real and fails if the docs say something different. It was needed: after a few dozen checks were added, two files still said 132 and a third said 104, when the real count was already 163.</p>
+          <p class="zh">文档里会写“194 项检查”“37 个题材”这样的数字。项目一长大，这些数字就过时了，而且没人会回头重数。所以有一项自动检查会去实际数一遍，和文档对不上就报错。这是被逼出来的：加了几十项检查之后，两个文件还写着 132、第三个写着 104，而实际已经有 163 项。</p>
 
           <div class="pull">
             <p class="en"><strong>Automatic checks miss things too.</strong> One check in the project makes sure the numbers in the docs are right, but it only recognises a few fixed ways of writing them. One file said “97” in a different wording, and the check never noticed — until I counted by hand while writing this post. I’ve since taught it that wording, but the next new wording will slip past just the same. So automatic checks don’t replace checking by hand now and then.</p>
@@ -196,7 +196,7 @@
                 <li><a href="#memory"><span class="en">The hard part was never writing a chapter</span><span class="zh">难的从来不是写出一章</span></a></li>
                 <li><a href="#assumptions"><span class="en">Why it works even if you’ve never coded</span><span class="zh">为什么不会编程也能用</span></a></li>
                 <li><a href="#working"><span class="en">How you know it’s working</span><span class="zh">怎么确认它没出问题</span></a></li>
-                <li><a href="#testing"><span class="en">For developers: how do you know you didn’t break it?</span><span class="zh">写给开发者：怎么知道你没把它改坏？</span></a></li>
+                <li><a href="#testing"><span class="en">For developers: changing the tool without breaking it</span><span class="zh">写给开发者：改了东西，怎么确认没改坏</span></a></li>
                 <li><a href="#carries-over"><span class="en">For developers: lessons that apply beyond novels</span><span class="zh">写给开发者：小说之外也用得上的经验</span></a></li>
               </ol>
             </dd>
