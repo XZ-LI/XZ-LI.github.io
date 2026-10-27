@@ -177,8 +177,14 @@
 
           <h2 id="carries-over"><span class="en">Lessons that apply beyond novels</span><span class="zh">小说之外也用得上的经验</span></h2>
 
-          <p class="en">Three things, none of them specific to fiction. Write the negative cases first, because a system that only ever sees what it should match will look perfect. When there is no ground truth, test the deterministic shell around the thing you cannot score, rather than giving up on testing. And treat documentation as an artifact under test, because every number in it is a claim, and claims decay faster than code.</p>
-          <p class="zh">三件事，没有一件是小说特有的。先写反例，因为一个只见过「该匹配什么」的系统看起来永远完美。没有标准答案时，去测你没法打分的那个东西周围那层确定的壳，而不是干脆放弃测试。以及，把文档当作被测对象，因为文档里的每一个数字都是一句承诺，而承诺烂得比代码快。</p>
+          <p class="en">Three things I learned building this, and none of them is specific to novels. They apply to almost any AI tool.</p>
+          <p class="zh">做这个项目学到了三条经验，没有一条是小说特有的，换到别的 AI 工具上也一样适用。</p>
+
+          <ul>
+            <li><span class="en"><strong>Test when it should do nothing.</strong> If you only test the jobs a tool is meant to do (“help me write a novel” → it starts), it will always look perfect. The real test is a set of requests that aren’t its business, like “write me a year-end summary”, to see whether it barges in anyway.</span><span class="zh"><strong>先想清楚“什么时候不该做”。</strong>只测它该干的活（说“帮我写小说”时启动），它看起来永远完美。真正要测的是一批“不该它管”的请求，比如“帮我写年终总结”，看它会不会乱插手。</span></li>
+            <li><span class="en"><strong>If something has no right answer, test the parts around it that do.</strong> There’s no right or wrong for whether a chapter is good. But whether the chapter file was saved, or the story’s memory was updated correctly, does have a right answer. Not being able to test the core is no reason to give up on testing altogether.</span><span class="zh"><strong>没有标准答案的东西，就测它周围有标准答案的部分。</strong>一章小说写得好不好，没法判对错；但章节文件存好了没有、故事记忆更新对了没有，是能判对错的。不能因为核心没法测，就整个放弃测试。</span></li>
+            <li><span class="en"><strong>Check the documentation too.</strong> Every number in it — how many checks, how many genres — is a promise to the reader. It goes out of date as soon as the project changes, and nobody goes back to recount on their own.</span><span class="zh"><strong>文档也要检查。</strong>文档里写的数字（多少项检查、多少个题材）都是对读者的承诺，项目一改就过时，而且没人会主动回头去数。</span></li>
+          </ul>
         </div>
 
         <div class="aside sticky">
