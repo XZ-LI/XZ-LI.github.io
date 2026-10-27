@@ -131,6 +131,25 @@
           <p class="en">The writing engine barely changed along the way. What changed was everything you would otherwise have had to figure out before writing your first line.</p>
           <p class="zh">这一路上，写作引擎本身几乎没动。变的是那些你本来要先自己搞懂、才能写出第一行字的东西。</p>
 
+          <h2 id="working"><span class="en">How you know it’s working</span><span class="zh">怎么确认它没出问题</span></h2>
+
+          <p class="en">You don’t have to check anything by hand. The tool checks itself at three points, and leaves every decision to you:</p>
+          <p class="zh">你不用自己动手检查什么。它会在三个地方自己检查，而每个决定都留给你：</p>
+
+          <ul>
+            <li><span class="en"><strong>Before you start.</strong> A built-in checkup lists anything missing from your setup. The AI fixes it, then runs the checkup again to confirm everything is ready.</span><span class="zh"><strong>开始之前。</strong>自带的环境检查会列出还缺什么。AI 补齐之后再跑一遍，确认都准备好了。</span></li>
+            <li><span class="en"><strong>After every chapter.</strong> It reviews what it just wrote: length, a repeated opening, stock AI phrases readers find grating, and whether the story broke any of your red lines, such as a mute hero suddenly speaking. Every problem comes with the passage that shows it.</span><span class="zh"><strong>每写完一章。</strong>它会回头检查刚写的内容：字数、开头是不是和上一章雷同、有没有读者嫌弃的“AI 味”套话，以及有没有违反你定下的红线，比如设定是哑巴的主角突然开口说话。每个问题都附上原文作为证据。</span></li>
+            <li><span class="en"><strong>You decide what gets fixed.</strong> It never rewrites a chapter on its own. You pick which problems to fix; the original is backed up first, so you can always go back.</span><span class="zh"><strong>改不改由你定。</strong>它不会自作主张重写。你点名要改哪几条，改之前会先备份原稿，不满意随时可以退回。</span></li>
+          </ul>
+
+          <p class="en">One thing worth doing yourself: after the project is set up, read its list of red lines once — the facts that must never change, like who is dead or what the hero can’t do. Everything after chapter one is built on them.</p>
+          <p class="zh">有一件事值得你亲自做：项目建好后，把它列出的红线读一遍——那些永远不能变的设定，比如谁已经死了、主角做不到什么。第一章之后的所有内容都建在它们上面。</p>
+
+          <div class="pull">
+            <p class="en"><strong>For developers.</strong> If you only want to write, you can stop here. The two sections below are about how the tool itself is tested and what I learned building it.</p>
+            <p class="zh"><strong>写给开发者。</strong>如果你只是想写小说，读到这里就够了。下面两节讲的是这个工具本身怎么测试，以及做它的过程中学到的东西。</p>
+          </div>
+
           <h2 id="testing"><span class="en">How do you know you didn’t break it?</span><span class="zh">怎么知道你没把它改坏？</span></h2>
 
           <p class="en">Here is the part I expected to be hardest, and was. The output is fiction. There is no correct answer to compare against, no assertion that says a chapter is right. Change one line of a prompt and you cannot tell from reading whether anything downstream quietly stopped working.</p>
@@ -170,8 +189,9 @@
                 <li><a href="#start"><span class="en">No coding needed: three steps to start</span><span class="zh">不会编程也能用：三步开始</span></a></li>
                 <li><a href="#memory"><span class="en">The hard part was never writing a chapter</span><span class="zh">难的从来不是写出一章</span></a></li>
                 <li><a href="#assumptions"><span class="en">Why it works even if you’ve never coded</span><span class="zh">为什么不会编程也能用</span></a></li>
-                <li><a href="#testing"><span class="en">How do you know you didn’t break it?</span><span class="zh">怎么知道你没把它改坏？</span></a></li>
-                <li><a href="#carries-over"><span class="en">What carries over</span><span class="zh">可以带走的部分</span></a></li>
+                <li><a href="#working"><span class="en">How you know it’s working</span><span class="zh">怎么确认它没出问题</span></a></li>
+                <li><a href="#testing"><span class="en">For developers: how do you know you didn’t break it?</span><span class="zh">写给开发者：怎么知道你没把它改坏？</span></a></li>
+                <li><a href="#carries-over"><span class="en">For developers: what carries over</span><span class="zh">写给开发者：可以带走的部分</span></a></li>
               </ol>
             </dd>
             <dt><span class="en">Repository</span><span class="zh">仓库</span></dt>
