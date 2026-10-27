@@ -1,24 +1,24 @@
 <!doctype html>
 <html lang="en"
-      data-title-en="Building a skill for someone who isn’t me — Xuezhao Li"
-      data-title-zh="把一个 skill 建给不是我的人用 — 李学昭">
+      data-title-en="Writing Chinese web novels with AI, from zero — Xuezhao Li"
+      data-title-zh="零基础用 AI 写网文 — 李学昭">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Seventeen commits over four days turned a private Chinese web-fiction writing pipeline into a skill a stranger could run. Notes on removed assumptions, and on testing a system whose output has no correct answer.">
+<meta name="description" content="You don’t need to code to write a Chinese web novel with AI: three steps to set up, then it writes chapter after chapter on its own. Then, how a layered memory keeps hundreds of chapters consistent, and how you test a system whose output has no correct answer.">
 <meta name="author" content="Xuezhao Li">
 <link rel="canonical" href="https://xz-li.github.io/blog/building-a-skill.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E%F0%9F%8E%AD%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Xuezhao Li">
-<meta property="og:title" content="Building a skill for someone who isn’t me">
-<meta property="og:description" content="Seventeen commits over four days. Almost none of them went into the writing engine.">
+<meta property="og:title" content="Writing Chinese web novels with AI, from zero">
+<meta property="og:description" content="No coding needed — three steps to set up, then the AI writes your web novel chapter after chapter, asking you only when the plot needs a direction.">
 <meta property="og:url" content="https://xz-li.github.io/blog/building-a-skill.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="zh_CN">
 <meta name="twitter:card" content="summary">
 <style>:root{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Building a skill for someone who isn’t me</title>
+<title>Writing Chinese web novels with AI, from zero</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;600&display=swap">
@@ -55,16 +55,16 @@
 
 <header class="hero" id="top">
   <div class="wrap">
-    <p class="eyebrow"><span class="en">Blog · build log</span><span class="zh">博客 · 构建记录</span></p>
-    <h1 class="post-title"><span class="en">Building a skill for someone who isn’t me</span><span class="zh">把一个 skill 建给不是我的人用</span></h1>
+    <p class="eyebrow"><span class="en">Blog · beginner’s guide</span><span class="zh">博客 · 零基础教程</span></p>
+    <h1 class="post-title"><span class="en">Writing Chinese web novels with AI, from zero</span><span class="zh">零基础用 AI 写网文</span></h1>
     <!-- 导读句，若要换文案改这两行 -->
     <p class="thesis">
-      <span class="en">Seventeen commits over four days turned a pipeline that wrote Chinese web serials into something a stranger could run. Almost none of that work went into the writing engine.</span>
-      <span class="zh">四天十七次提交，把一套自己能用的中文网文写作流程，改造成一个陌生人也能跑起来的东西。这些工作几乎没有一条花在写作引擎上。</span>
+      <span class="en">You don’t need to know how to code. Three steps to set up, then it writes on its own: chapter after chapter, consistent for hundreds of them. It only stops to ask you when the plot needs a direction.</span>
+      <span class="zh">不会编程也能用。三步装好就能自动写：AI 一章一章往下写，写到几百章也不前后矛盾，只在定剧情方向时问你一下。</span>
     </p>
     <div class="meta-row">
       <span class="chip"><span class="en">October 2026</span><span class="zh">2026 年 10 月</span></span>
-      <span class="chip"><span class="en">17 commits · 4 days</span><span class="zh">17 次提交 · 4 天</span></span>
+      <span class="chip"><span class="en">Beginner-friendly · writes on its own</span><span class="zh">零基础 · 自动写章</span></span>
       <a class="chip primary" href="../index.html#blog"><span class="en">← All posts</span><span class="zh">← 返回博客</span></a>
     </div>
   </div>
@@ -75,6 +75,23 @@
     <article class="proj">
       <div class="proj-body">
         <div class="prose">
+          <h2 id="start"><span class="en">No coding needed: three steps to start</span><span class="zh">不会编程也能用：三步开始</span></h2>
+
+          <p class="en">You don’t install anything yourself, and you don’t need a plot worked out in advance. You have an AI assistant do the setup, then tell it you want to write a novel.</p>
+          <p class="zh">你不用自己装任何东西，也不用事先想好剧情。让 AI 助手替你装好，然后告诉它你想写小说就行。</p>
+
+          <ul class="layers">
+            <li><b><span class="en">Step 1</span><span class="zh">第一步</span></b><span><span class="en">Get an AI coding assistant, the way you’d install any app. Inside mainland China, Qoder or Trae is the easiest route; elsewhere, Claude Code or Cursor.</span><span class="zh">装一个 AI 编程助手，和装普通软件一样。大陆用 Qoder 或 Trae 最省事，海外用 Claude Code 或 Cursor。</span></span></li>
+            <li><b><span class="en">Step 2</span><span class="zh">第二步</span></b><span><span class="en">Paste it one paragraph from the <a href="https://github.com/XZ-LI/ai-webnovel-pipeline#starting-from-zero-in-five-minutes" target="_blank" rel="noopener">README</a>. It downloads the tool, checks your environment and installs whatever is missing.</span><span class="zh">把 <a href="https://github.com/XZ-LI/ai-webnovel-pipeline/blob/main/README.zh-CN.md#零基础五分钟开始" target="_blank" rel="noopener">README</a> 里的那一段话整段贴给它。它会自己下载工具、检查环境、补齐缺的东西。</span></span></li>
+            <li><b><span class="en">Step 3</span><span class="zh">第三步</span></b><span><span class="en">Sign up with a model provider and paste back the key — on DeepSeek, ten-odd chapters cost about a dollar. Then say “I want to write a novel.”</span><span class="zh">去模型平台注册、拿一个 key 贴回给它——用 DeepSeek 写十几章大约几块钱。然后说一句「我想写小说」。</span></span></li>
+          </ul>
+
+          <p class="en">It asks which genre, how much you already have (nothing is a fine answer) and which readership, then offers several openings to choose from. After that it writes on its own; every 30 chapters it drafts a few versions of the next arc for you to pick. Chapters land as plain text files you can open with a double-click.</p>
+          <p class="zh">它会问你写什么题材、手上已经有多少（什么都没有也可以）、写给哪类读者，然后给你几个开局方案挑。之后它就自己往下写，每 30 章会出几版后续大纲让你选一个。写好的章节就是普通的 txt 文件，双击就能读。</p>
+
+          <p class="en">Those three steps are the short version. The rest of this post is about what happens underneath them: why writing one good chapter is easy and writing two hundred is not, and what it took to make a tool I built for myself usable by someone who isn’t me.</p>
+          <p class="zh">上面三步是简单版。下面讲的是这三步底下发生了什么：为什么写好一章容易、写好两百章难，以及要把一个自己用的工具变成别人也能用的，到底花了多少功夫。</p>
+
           <h2 id="memory"><span class="en">The hard part was never writing a chapter</span><span class="zh">难的从来不是写出一章</span></h2>
 
           <p class="en">A serialized Chinese web novel runs several hundred chapters and six hundred thousand characters. No model holds that in context. So the difficulty is not producing one good chapter — a competent model does that on the first try. The difficulty is that chapter 200 has to remember a detail planted in chapter 3, and has to still believe it.</p>
@@ -150,6 +167,7 @@
             <dt><span class="en">Contents</span><span class="zh">目录</span></dt>
             <dd>
               <ol class="toc">
+                <li><a href="#start"><span class="en">No coding needed: three steps to start</span><span class="zh">不会编程也能用：三步开始</span></a></li>
                 <li><a href="#memory"><span class="en">The hard part was never writing a chapter</span><span class="zh">难的从来不是写出一章</span></a></li>
                 <li><a href="#assumptions"><span class="en">The rewrite that mattered: the user is not me</span><span class="zh">真正的重写：使用者不是我</span></a></li>
                 <li><a href="#testing"><span class="en">How do you know you didn’t break it?</span><span class="zh">怎么知道你没把它改坏？</span></a></li>
