@@ -158,7 +158,7 @@
           <p class="en">So I don’t test the writing itself. I test everything around it that does have a right answer, in three ways. None of them costs anything to run:</p>
           <p class="zh">所以我不测小说写得好不好，而是测它周围那些有标准答案的部分。一共三种办法，跑起来都不花钱：</p>
 
-          <h3><span class="en">194 automatic checks</span><span class="zh">194 项自动检查</span></h3>
+          <h3><span class="en">196 automatic checks</span><span class="zh">196 项自动检查</span></h3>
           <p class="en">Is every file where it should be? After a chapter, is the story’s memory updated correctly? Are the genre templates complete? It takes a few seconds. Anyone who edits the tool can run it to make sure they haven’t broken anything.</p>
           <p class="zh">文件是不是都在该在的地方？写完一章，故事记忆有没有正确更新？题材模版是不是完整？几秒钟跑完。谁改了这个工具，跑一遍就知道有没有改坏。</p>
 
@@ -167,8 +167,8 @@
           <p class="zh">这个工具应该在你要写小说时启动，其他时候别插手。所以我写了 11 条应该启动它的请求，和 10 条不应该启动的。那 10 条才是真正的考题，因为它们用的是同一批词：<em>帮我写一篇年终总结</em>；<em>分析番茄免费榜前五十的题材分布</em>；<em>我的小说网站报错了，帮我看日志</em>；<em>这本小说的版权合同该注意什么</em>。每一条都提到了写作或小说。工具只要设得稍微宽一点，11 条全过，却会在这 10 条上乱插手——而如果你没有事先把它们写下来，根本发现不了。</p>
 
           <h3><span class="en">Checking the numbers in the docs</span><span class="zh">核对文档里的数字</span></h3>
-          <p class="en">The docs say things like “194 checks” or “37 genres”. As the project grows, those numbers go out of date, and nobody goes back to recount. So one of the automatic checks counts for real and fails if the docs say something different. It was needed: after a few dozen checks were added, two files still said 132 and a third said 104, when the real count was already 163.</p>
-          <p class="zh">文档里会写“194 项检查”“37 个题材”这样的数字。项目一长大，这些数字就过时了，而且没人会回头重数。所以有一项自动检查会去实际数一遍，和文档对不上就报错。这是被逼出来的：加了几十项检查之后，两个文件还写着 132、第三个写着 104，而实际已经有 163 项。</p>
+          <p class="en">The docs say things like “196 checks” or “37 genres”. As the project grows, those numbers go out of date, and nobody goes back to recount. So one of the automatic checks counts for real and fails if the docs say something different. It was needed: after a few dozen checks were added, two files still said 132 and a third said 104, when the real count was already 163.</p>
+          <p class="zh">文档里会写“196 项检查”“37 个题材”这样的数字。项目一长大，这些数字就过时了，而且没人会回头重数。所以有一项自动检查会去实际数一遍，和文档对不上就报错。这是被逼出来的：加了几十项检查之后，两个文件还写着 132、第三个写着 104，而实际已经有 163 项。</p>
 
           <div class="pull">
             <p class="en"><strong>Automatic checks miss things too.</strong> One check in the project makes sure the numbers in the docs are right, but it only recognises a few fixed ways of writing them. One file said “97” in a different wording, and the check never noticed — until I counted by hand while writing this post. I’ve since taught it that wording, but the next new wording will slip past just the same. So automatic checks don’t replace checking by hand now and then.</p>
@@ -203,7 +203,7 @@
             <dt><span class="en">Repository</span><span class="zh">仓库</span></dt>
             <dd><a class="visit" href="https://github.com/XZ-LI/ai-webnovel-pipeline" target="_blank" rel="noopener">github.com/XZ-LI/ai-webnovel-pipeline</a></dd>
             <dt><span class="en">Scale</span><span class="zh">规模</span></dt>
-            <dd><span class="en">37 genre templates · 15 scripts · 194 deterministic self-checks · 21 trigger queries</span><span class="zh">37 个题材模版 · 15 个脚本 · 194 项确定性自检 · 21 条触发测试</span></dd>
+            <dd><span class="en">37 genre templates · 15 scripts · 196 deterministic self-checks · 21 trigger queries</span><span class="zh">37 个题材模版 · 15 个脚本 · 196 项确定性自检 · 21 条触发测试</span></dd>
             <dt><span class="en">Built with</span><span class="zh">技术栈</span></dt>
             <dd><div class="stack"><span>Python</span><span>DeepSeek</span><span>Qwen</span><span>OpenAI-compatible APIs</span></div></dd>
           </dl>
